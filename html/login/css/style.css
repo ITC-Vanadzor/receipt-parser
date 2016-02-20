@@ -98,7 +98,7 @@ li a {
     display: inline-block;
     color: #737373;
     text-align: center;
-    padding: 21px 18px;
+    padding: 21px 16px;
     text-decoration: none;
     font-size: 0.9em;
     font-weight: bold;
@@ -135,9 +135,10 @@ li a:hover {  color: #4d94ff;}
     	-webkit-box-shadow: 0 0 10px 3px rgba(128,128,128,.55);
 	box-shadow: 0 0 10px 3px rgba(128,128,128,.55);
 	color:black;
-	width:30%;
-	padding: 4% 1%; 
-	margin:5% auto 5% auto;
+	width:25em;
+        height:30em;
+	margin:auto;
+	margin-top: 4%;
 	border-radius: 10px;
 }
 
@@ -222,7 +223,7 @@ li a:hover {  color: #4d94ff;}
 /* registration page*/
 .regDivstyle{
 	
-	margin:auto;
+	margin: 1% auto;
         text-align:left;
         height:50%;
         width:50%; 
@@ -234,19 +235,61 @@ li a:hover {  color: #4d94ff;}
 }
 
 .regInputField {
-	padding: 1%;
+	padding: 2%;
 	margin-top: 3%;
         width:95%; 
-	font-size: 90%
+	font-size: 70%
 }
 /* end of registration page*/
 
 .regButtonSize {
-		font-size: 130%;
-		width: 50%;
+		font-size: 70%;
+		width: 40%;
 		margin: auto 20%; 
-		padding: 1%;
+		padding: 1.5%;
  } 
+H2{
+
+ color:#737373;
+}
+
+/* usage page  */
+.usageUl{
+
+        background-color:black;
+        background: linear-gradient(45deg,#cccccc,#ccccc1);
+        border-width: 0px;
+        margin: 8% 20%;
+}
+/* each step div*/
+.usageSteps{
+        width:20%;
+        border-radius: 5px;
+        height: 25%;
+        padding: 4%;
+        font-size: 120%;
+        text-align:center;
+}
+.usageSteps:hover{
+   Display:block;
+
+}
+
+/* image style+size  for steps*/
+.imageStep{
+	
+        width:56%;
+        margin-top: 0px;
+	margin-left: 15%;
+}
+
+
+.usageText{
+	text-align:center;
+        width: 84%;
+        margin-bottom:0px;
+}
+/*end of usage page*/
 
 
 /*____________________________GEVOR__________________________*/
