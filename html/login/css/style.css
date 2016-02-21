@@ -37,6 +37,10 @@ body{
     	 border-width: 1px; 
     	 border-color: #005c99; 
 	 background: linear-gradient(to top, #0094F7, #007acc);
+         border-radius: 0.3em;
+	 font-size: 1.15em;
+	 font-weight: bold;
+	
  } 
 .blueButton:hover { 
 	background: #0076C4;
@@ -53,9 +57,6 @@ body{
 	margin-left: 10%;
 	height: 2.1em;
 	width: 80%;
-	border-radius: 0.3em;
-	font-size: 1.15em;
-	font-weight: bold;
 }
 
 /*Menu bar buttons sizes*/
@@ -128,7 +129,7 @@ li a:hover {  color: #4d94ff;}
          width: 75%; 
 }
 /*sign in background*/
-#loginBg{
+.loginBg{
 	background-color:#E8E8E8;
 	background: linear-gradient(to top, #e8e8e8, #bfbfbf);
 	-moz-box-shadow: 0 0 10px 3px rgba(128,128,128,.55);
@@ -142,7 +143,7 @@ li a:hover {  color: #4d94ff;}
 }
 
 /*sign in top background*/
-#loginTopBg{
+.loginTopBg{
 	background-color:#B2B0B0;
 	height: 3%;
 	width: 100%;
@@ -220,34 +221,27 @@ li a:hover {  color: #4d94ff;}
 /*______________________ANI_______________________*/
 
 /* registration page*/
-.regDivstyle{
-	
-	margin:auto;
-        text-align:left;
-        height:50%;
-        width:50%; 
-        padding:8%;   
-}
 
 .textUnderRegInput{
 	font-size: 85%
 }
 
-.regInputField {
-	padding: 1%;
+.regInputSize {
+	padding: 2%;
 	margin-top: 3%;
         width:95%; 
 	font-size: 90%
 }
 /* end of registration page*/
 
-.regButtonSize {
-		font-size: 130%;
-		width: 50%;
-		margin: auto 20%; 
-		padding: 1%;
- } 
 
+ 
+H2{
+	margin-top: 1%;
+	color: #737373;
+
+
+}
 
 /*____________________________GEVOR__________________________*/
 
