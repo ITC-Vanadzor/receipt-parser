@@ -1,6 +1,15 @@
 body{
 	margin:0;
 	padding:0;
+
+}
+H2{
+	margin-top: 1%;
+	color: #737373;
+}
+
+p{
+	margin-left:10%;
 }
 
 /*web site background*/
@@ -198,6 +207,9 @@ li a:hover {  color: #4d94ff;}
 	font-size: 0.85em;
 }
 
+#forgotTextAbove{
+	margin:2% 10% 1%;
+}
 /*checkbox style*/
 #checkbox{
 	float: left;
@@ -224,6 +236,7 @@ li a:hover {  color: #4d94ff;}
 
 .textUnderRegInput{
 	font-size: 85%
+	
 }
 
 .regInputSize {
@@ -236,12 +249,7 @@ li a:hover {  color: #4d94ff;}
 
 
  
-H2{
-	margin-top: 1%;
-	color: #737373;
 
-
-}
 
 /*____________________________GEVOR__________________________*/
 
