@@ -28,7 +28,7 @@
 *Goals*
 --------
 
-This is the README file of the HDM project which has the following goals:
+This is the README file of the HDM/Receipt Parser project which has the following goals:
  
 * Scans the check of Cash Control Machine
 * Reads the data (e.g. shop/company name, address, deal date, amount, etc)
