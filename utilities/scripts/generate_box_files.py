@@ -75,30 +75,41 @@ def __correct_box(arm_file, eng_file, out_file):
     else:
         print 'Sizes of the ' + arm_file + ' and ' + eng_file + ' files are not equal ... or files are empty'
 
+def __generate_and_correct_box_file(size_lpi, size_cpi, font):
+    font_name = font.replace("\n", "")
+    file_name = font_name +  '_' + str(size_lpi) + '_' +  str(size_cpi)
+    file_full_name = file_name + '/' + file_name
+    util.create_dir(file_name)
+    __generate_ps(size_lpi, size_cpi, font_name)
+    __generate_ttf(file_full_name)
+    __generate_box(file_full_name)
+    __correct_box(PATH_ALPH, file_full_name + '.box', file_full_name + '_correct.box')
 
-def generate(size_file, font_file):
-    if util.is_unix():
-        __copy_font_files(PATH_FONTS_DIR)
-        fonts = util.read_from_file(font_file)
-        sizes = util.read_json_from_file(size_file)
-        if not (fonts is None or sizes is None):
-            for size in sizes:
+
+def __generate_and_correct_box_files(size_file, font_file):
+    __copy_font_files(PATH_FONTS_DIR)
+    fonts = util.read_from_file(font_file)
+    sizes = util.read_json_from_file(size_file)
+    if not (fonts is None or sizes is None):
+        for size in sizes:
+            try:
                 size_lpi = size['lpi']
                 size_cpi = size['cpi']
-                for font in fonts:
-                    if ' ' in font:
-                        print(bcolors.OKBLUE + 'Error: Font name  -- ' + font + bcolors.ENDC)
-                        continue
-                    font_name = font.replace("\n", "")
-                    file_name = font_name +  '_' + str(size_lpi) + '_' +  str(size_cpi)
-                    file_full_name = file_name + '/' + file_name
-                    util.create_dir(file_name)
-                    __generate_ps(size_lpi, size_cpi, font_name)
-                    __generate_ttf(file_full_name)
-                    __generate_box(file_full_name)
-                    __correct_box(PATH_ALPH, file_full_name + '.box', file_full_name + '_correct.box')
-        else:
-            print(bcolors.FAIL + 'Error: Incorrect fonts or size files ... ' + bcolors.ENDC)
+            except KeyError, e:
+                print(bcolors.FAIL + 'Error: size file content ... ' + bcolors.ENDC)
+                return
+            for font in fonts:
+                if ' ' in font:
+                    print(bcolors.OKBLUE + 'Error: Font name  -- ' + font + bcolors.ENDC)
+                    continue
+                __generate_and_correct_box_file(size_lpi, size_cpi, font)
+    else:
+        print(bcolors.FAIL + 'Error: Incorrect fonts or size files ... ' + bcolors.ENDC)
+    
+    
+def generate(size_file, font_file):
+    if util.is_unix():
+        __generate_and_correct_box_files(size_file, font_file)
     else:
         print(bcolors.FAIL + 'Error: Unsupported platform ... ' + bcolors.ENDC)
 
