@@ -6,7 +6,7 @@ import platform
 import sys
 import time
 import json
-
+from NotFound import NotFound
 from os.path import expanduser
 
 class bcolors:
@@ -32,7 +32,6 @@ def file_has_x_permission(path):
     except OSError, e:
         print(bcolors.FAIL + str(e) + bcolors.ENDC)
         return False
-        # TBD install paps from peckage
 
 def copy_files(fromPath, toPath, fileExtension = None):
     try:
@@ -47,8 +46,6 @@ def copy_files(fromPath, toPath, fileExtension = None):
                     print_by_loading_bar()
     except OSError, e:
         print (bcolors.WARNING + str(e) + bcolors.ENDC)
-    except IOError, e:
-        print (bcolors.FAIL + str(e) + bcolors.ENDC)
 
 def write_in_file(file_name, content):
     if os.path.exists(file_name) and (not os.stat(file_name).st_size == 0):
@@ -64,6 +61,9 @@ def write_in_file(file_name, content):
         print (bcolors.OKGREEN + 'Done: Please check the results in the ' + file_name + ' file' + bcolors.ENDC)
     except IOError, e:
         print (bcolors.FAIL + 'Can not write into "' + file_name + '" file' + bcolors.ENDC)
+        raise NotFound('Error: ' + file_name + ' file is incorrect') 
+    except TypeError, e:
+        raise NotFound('Error: content for ' + file_name + ' file is incorrect ') 
 
 
 def read_from_file(file_name):
@@ -103,6 +103,7 @@ def create_dir(path):
             os.makedirs(path)
     except OSError, e:
         print (bcolors.FAIL + str(e) + bcolors.ENDC)
+        raise NotFound('Error: ' + str(e)) 
 
 def get_platform_name():
     return platform.system()

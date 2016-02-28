@@ -6,19 +6,27 @@
 
 ```
  1. Goals
- 2. Usage
- 3. Directory structure
+ 2. Environment
+ 3. Usage
+ 4. Directory structure
 ```
+
 *Goals*
 --------
 
-This is the README file Box file generator which generates box files from given fonts and font sizes
+This is the README file for Box file generator script which generates box files from given font names and font sizes
+
+*Environment*
+--------
+- paps (sudo apt-get install paps)
+- tesseract (TBD)
+- gs (TBD)
 
 *Usage*
 --------
 python main.py -f < fonts_file_path > -s < size_file_path >
 
-Note: -f and -s flags are optional by default paths are:
+Note: -f and -s flags are optional, default paths are:
 - -f resources/fonts.txt
 - -s resources/size.json 
 
@@ -33,4 +41,6 @@ Note: -f and -s flags are optional by default paths are:
     * alph.txt
     * Unicode
     * fonts.txt
-    * size.json  
+    * size.json 
+
+TBD Need to add unit tests

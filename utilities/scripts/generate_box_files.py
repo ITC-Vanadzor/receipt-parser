@@ -1,6 +1,7 @@
 
 from utils import util
 from utils.util import bcolors
+from utils.NotFound import NotFound
 
 '''
 Path Constants 
@@ -13,16 +14,15 @@ PATH_FONTS_DIR='resources/Unicode'
 '''
 Commands Constants
 '''
-PS_GENERATE='paps --lpi=%d --cpi=%d --font=%s.ttf %s' 
-GS_GENERATE='gs -q -dNOPAUSE -dBATCH -sDEVICE=tiffg4 -sPAPERSIZE=a4 -sOutputFile=%s.ttf %s.ps'
-#TBD is 6 font size
-TESSERACT_COMMAND='tesseract -psm 6 %s.ttf %s batch.nochop makebox'
+PS_GENERATE='paps --lpi=%d --cpi=%d --font=%s.tif %s' 
+GS_GENERATE='gs -q -dNOPAUSE -dBATCH -sDEVICE=tiffg4 -sPAPERSIZE=a4 -sOutputFile=%s.tif %s.ps'
+TESSERACT_COMMAND='tesseract -psm 6 %s.tif %s batch.nochop makebox'
 VERSION_COMMAND='%s --version'
 
 def __copy_font_files(path):
     home = util.get_home_dir_name()
     util.create_dir(home + PATH_FONTS)
-    util.copy_files(path, home +PATH_FONTS)
+    util.copy_files(path, home + PATH_FONTS)
 
 def __generate_ps(lpi_value, cpi_value, font_name):
     if util.file_has_x_permission(PATH_PAPS) is not None:
@@ -30,28 +30,26 @@ def __generate_ps(lpi_value, cpi_value, font_name):
        file_name = font_name + '_' +  str(lpi_value) + '_' +  str(cpi_value) 
        util.write_in_file(file_name + '/' + file_name + '.ps', ps_content)
     else:
-        print(bcolors.FAIL + 'Error can not run paps command ... ' + bcolors.ENDC)
+        raise NotFound('Error: can not run paps command') 
 
-def __generate_ttf(ps_file_name):
+def __generate_tif(ps_file_name):
     gs =  util.run_command(VERSION_COMMAND % 'gs')
     if not gs is None:
         util.run_command(GS_GENERATE % (ps_file_name, ps_file_name))
         print (bcolors.OKGREEN + 'Done: Created' + \
-            ps_file_name + '.ttf file' + bcolors.ENDC)
+            ps_file_name + '.tif file' + bcolors.ENDC)
     else:
-        print(bcolors.FAIL + \
-            'Error can not run gs command ... ' + bcolors.ENDC)
+        raise NotFound('Error: can not run gs command') 
 
-def __generate_box(ttf_file_name):
+def __generate_box(tif_file_name):
     tesseract =  util.run_command(VERSION_COMMAND % 'tesseract')
     if not tesseract is None:
-        util.run_command(TESSERACT_COMMAND % (ttf_file_name, ttf_file_name))
+        util.run_command(TESSERACT_COMMAND % (tif_file_name, tif_file_name))
         print (bcolors.OKGREEN + 'Done: Created ' + \
-             ttf_file_name + '.box file' + bcolors.ENDC)
+             tif_file_name + '.box file' + bcolors.ENDC)
     else:
-        print(bcolors.FAIL + 'Error can not run tesseract command ... ' + bcolors.ENDC)
+        raise NotFound('Error: can not run tesseract command') 
 
-#TBD TypeError
 def __correct_box(arm_file, eng_file, out_file):
     lines = []
     lines1 = util.read_from_file(arm_file);
@@ -73,7 +71,7 @@ def __correct_box(arm_file, eng_file, out_file):
         util.write_in_file(out_file, content)
         print (bcolors.OKGREEN + 'Done... \n' + 'Created ' + out_file + ' file ... ' + bcolors.ENDC)
     else:
-        print 'Sizes of the ' + arm_file + ' and ' + eng_file + ' files are not equal ... or files are empty'
+        raise NotFound('Sizes of the ' + arm_file + ' and ' + eng_file + ' files are not equal ... or files are empty') 
 
 def __generate_and_correct_box_file(size_lpi, size_cpi, font):
     font_name = font.replace("\n", "")
@@ -81,7 +79,7 @@ def __generate_and_correct_box_file(size_lpi, size_cpi, font):
     file_full_name = file_name + '/' + file_name
     util.create_dir(file_name)
     __generate_ps(size_lpi, size_cpi, font_name)
-    __generate_ttf(file_full_name)
+    __generate_tif(file_full_name)
     __generate_box(file_full_name)
     __correct_box(PATH_ALPH, file_full_name + '.box', file_full_name + '_correct.box')
 
@@ -96,15 +94,12 @@ def __generate_and_correct_box_files(size_file, font_file):
                 size_lpi = size['lpi']
                 size_cpi = size['cpi']
             except KeyError, e:
-                print(bcolors.FAIL + 'Error: size file content ... ' + bcolors.ENDC)
+                print(bcolors.WARNING + 'Warning: size file content ... ' + bcolors.ENDC)
                 return
             for font in fonts:
-                if ' ' in font:
-                    print(bcolors.OKBLUE + 'Error: Font name  -- ' + font + bcolors.ENDC)
-                    continue
                 __generate_and_correct_box_file(size_lpi, size_cpi, font)
     else:
-        print(bcolors.FAIL + 'Error: Incorrect fonts or size files ... ' + bcolors.ENDC)
+        raise NotFound('Error: Incorrect fonts or size files ...') 
     
     
 def generate(size_file, font_file):
