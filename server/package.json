@@ -1,0 +1,27 @@
+{
+  "name": "nodejs",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "BSD-2-Clause",
+  "dependencies": {
+    "acl": "^0.4.9",
+    "async": "^1.5.2",
+    "body-parser": "~1.15.0",
+    "ejs": "^2.4.1",
+    "express": "~4.13.4",
+    "express-jwt": "^3.3.0",
+    "joi": "^8.0.4",
+    "js-sha256": "^0.3.0",
+    "jsonwebtoken": "^5.7.0",
+    "mongoose": "^4.4.6",
+    "multer": "^1.1.0",
+    "mysql": "^2.10.2",
+    "passport": "^0.3.2",
+    "passport-local": "^1.0.0"
+  }
+}

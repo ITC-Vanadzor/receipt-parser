@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>Sign In to HDM</title>
+      <link rel="stylesheet" href="./css/style.css">
+      <script src="./js/script.js"></script>
+   </head>
+   <body  class="webSiteBackground" onLoad="showDiv()">
+      <div class="wrapper">
+         <div align="center" class="content">
+            <div id="signInDiv" class="styledBg loginBgSize" >
+               <a href="index.html"><img src="./res/icon.png"  class="signInLogoSize"></a>
+
+         <form action="user/login" method="post" >
+                  <input id="iEmail"type="text" name="email" placeholder="Username or Email" class="lightInput"  >
+                  <label onclick="showDiv('forgotPassDiv')" id="forgot">Forgot password?</label>
+                  <input  id="iPassword"type="password" name="password" placeholder="Password" class="lightInput">
+                  <label id="rememberStyle"><input  type="checkbox" name="remember"  >Remember me</label>
+                  <button   class="blueButton signInButtonSize">Sign In</button>	
+            </form>
+
+
+		<div align="center"><label onclick="showDiv('signUpDiv')" class="signUpLink">Create an account</label></div>
+            </div>
+            <div id="forgotPassDiv" class="styledBg loginBgSize" align="center">
+            <a href="index.html" ><img src="./res/icon.png"   class="signInLogoSize"></a>
+
+               <form action="#" >
+                  <p class="textUnderRegInput" id="forgotTextAbove">Enter your email address and we will send you a link to reset your password.</p>
+                  <input class="lightInput"  placeholder="Enter your email address" type="email">
+                  <button class="blueButton signInButtonSize">Send password reset email</button>	
+               </form>
+		<div align="center"><label onclick="showDiv('signUpDiv')" class="signUpLink">Create an account</label></div>
+            </div>
+            <!--creating div -->
+
+            <div id="signUpDiv" class="styledBg loginBgSize" >
+            <a href="index.html"><img src="./res/icon.png"  class="signInLogoSize"></a>
+       <form action="user/registration" method="post">
+                  <div class="loginBg">
+                     <H3>Create your personal account</H3>
+                     <!-- input for username-->
+                     <input type="text"  name="username" id="addName" class="regInputSize lightInput" placeholder="Username" >
+                     <p class="textUnderRegInput">
+                        This will be your username-you can enter your organization's username next.
+                     </p>
+                     <!-- input for username-->
+                     <input type="text" name="email" id="addEmail"   class="regInputSize lightInput"  placeholder="Email address">
+                     <p class="textUnderRegInput">
+                        You will occasionally receive  account related email. We promise not to share you email with anyone.
+                     </p>
+                     <!-- input for username-->
+                     <input type="password" name="password" id="addPassword" class="regInputSize lightInput" placeholder="Password">
+                     <p class="textUnderRegInput">
+                        Use at least one lowercase letter, one numeral and seven characters.
+                     </p>
+                     <!--Button of registration-->
+                     <button  class ="signInButtonSize blueButton ">Create an account</button>
+                  </div>
+               </form>
+            </div>
+            
+         </div>
+          
+      </div>
+
+  <div class="profileDivSize1 styledBg" id="getMailForPassword">
+
+              <p class="headStyle">Account settings</p>
+
+              <div class="profileInputs">
+                <input type="password" name="password"  class="lightInput profileInputSize">
+                <input type="password" name="newpass"  class="lightInput profileInputSize">
+                <input type="password" name="repass"  class="lightInput profileInputSize">
+             </div>
+
+              <div class="profileLabels">
+                <p class="profileLabelsTop1">Password</p>
+                <p class="profileLabelsTop1">New Password</p>
+                <p class="profileLabelsTop1">Repeat Password</p>
+              </div>
+              
+              <button class="blueButton profileButtonSize" >Change password</button>
+            </div> 
+   </body>
+</html>

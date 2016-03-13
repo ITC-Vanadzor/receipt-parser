@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="./js/script.js" type="text/javascript"></script>
+  <title>HDM Statistic</title>
+  <link rel="stylesheet" href="./css/style.css">
+</head>
+  <body  onload="table()" class="webSiteBackground">
+ <ul>
+         <a class="active" href="index.html"><img src="./res/icon.png" id="smallogo"></a>
+         <li><a href="#about">About us</a></li>
+         <li><a href="usage.html">How to use</a></li>
+         <li><a href="#download">Download</a></li>
+         <div>
+            <a href="signin.html"    class="blueButton menuBarButtonSize" >Log out</a>
+            <a href="profile.html"   class="grayButton menuBarButtonSize">Profile</a>
+         </div>
+      </ul>
+
+    <canvas class="styledBg"" id='iGraph' style="margin: 7% 20%;">Boooo!</canvas>
+
+    <div  id="TableBG">
+         <div class="dist" id="filter" >
+      <input type="date"id="firstDate"  name="day" min="2000-01-02">
+      <input type="date"id="secondDate" name="day" min="2000-01-02">
+      <button onclick="Filter()" type="button">Filter</button>
+      <button onclick="addRow()">Add row</button> 
+    </div>
+
+      <table class="dist" id="myTable"></table>
+      <button id="moreImage" class="grayButton"  onclick="count()">more...</button>
+    </div>
+    
+    <div id="editWindow" class="styledBg">
+      
+        <img src="./res/3step.png" height="200" alt="pic" >
+      
+      <div id ="editRowInputs">
+        
+        <input type="text"id="Market" placeholder="Market" name="market" min="2000-01-02"><label>Market</label>
+        <input type="text"id="Date" placeholder="Date" name="date" min="2000-01-02"><label>Date</label>
+
+        <input type="text"id="Time" placeholder="Time" name="time" min="2000-01-02"><label>Time</label>
+
+        <input type="text"id="Price" placeholder="Price" name="price" min="2000-01-02"><label>Price</label>
+
+        <input type="text"id="Item"  placeholder="Item" name="item" min="2000-01-02"><label>Item</label>
+
+        <button id="saveChanges"  onclick="hideDiv()" class="grayButton">save</button>
+                <button id="cancelChanges" onclick="hideDiv()" class="grayButton">cancel</button>
+    </div>  
+</body>
+</html>
+                                                                                                                                               
+          
