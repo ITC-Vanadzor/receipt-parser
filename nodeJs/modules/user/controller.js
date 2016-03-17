@@ -9,8 +9,48 @@ var jsonwebtoken = require('jsonwebtoken');
 
 
 module.exports.get = function(req, res) {
-    res.end('-----index-----');
+      res.status(200).send([ {
+        market: 'First',
+        date: '12-01-2016',
+        time: '12:01',
+        money: '5000',
+        item: 'empty',
+        path: 'photo0001.jpg'
+    },
+     {
+        market: 'Second',
+        date: '12-02-2016',
+        time: '12:01',
+        money: '18000',
+        item: 'empty',
+        path: 'photo0001.jpg'
+    },
+     {
+        market: 'Third',
+        date: '12-03-2016',
+        time: '12:01',
+        money: '13000',
+        item: 'empty',
+        path: 'photo0001.jpg'
+    },
+     {
+        market: 'Four',
+        date: '12-04-2016',
+        time: '12:01',
+        money: '25000',
+        item: 'empty',
+        path: 'photo0001.jpg'
+    },
+     {
+        market: 'Five',
+        date: '12-05-2016',
+        time: '12:01',
+        money: '8000',
+        item: 'empty',
+        path: 'photo0001.jpg'
+    }])
 };
+
 
 module.exports.signIn = function(req, res,next) {
    var data = req.body;

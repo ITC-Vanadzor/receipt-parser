@@ -63,11 +63,11 @@ function progressSteps(idProgress, idCircle, idStep) {
 
 
 /*Database structure */
-function DatabaseItem(name, date, money,note) {
+function DatabaseItem(name, date, money, note) {
     this.name = name;
     this.date = date;
     this.money = money;
-    this.note=(note)?note:"";
+    this.note = (note) ? note : "";
     this.getArray = function() {
         var arr = [this.name, this.date.toLocaleDateString(), this.date.toLocaleTimeString(), this.money];
         return arr;
@@ -92,7 +92,7 @@ function Database() {
             });
 
         }
-    /*sort array by Price*/
+        /*sort array by Price*/
     this.sortByPrice = function() {
 
         this.item.sort(function(a, b) {
@@ -149,21 +149,19 @@ myDb.addItem("classile", new Date(2017, 4, 21, 12, 32), 5700);
 
 
 
-var getXItem=function(f,t){
- 
-    var years=t.getFullYear()-f.getFullYear();
+var getXItem = function(f, t) {
 
-    if(years && years>2){
-        result=[];
-        for(var i=f.getFullYear();i<=t.getFullYear(); ++i){
+    var years = t.getFullYear() - f.getFullYear();
+
+    if (years && years > 2) {
+        result = [];
+        for (var i = f.getFullYear(); i <= t.getFullYear(); ++i) {
             result.push(i);
         }
         return result;
-    }
-    else if(years){
-        return ["esiminch","esiminch","esiminch"];
-    }
-    else{
+    } else if (years) {
+        return ["esiminch", "esiminch", "esiminch"];
+    } else {
         return ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jly", "Aug", "Sep", "Oct", "Nov", "Dec"];
     }
 }
@@ -172,139 +170,57 @@ var getXItem=function(f,t){
 function showGraph() {
 
     var lineChartData = {
-            labels: [],
-            datasets : [
-                {
-                    label: "My First dataset",
-                    fillColor : "rgba(0, 92, 153,0.2)",
-                    strokeColor : "rgba(220,220,220,1)",
-                    pointColor : "rgba(220,220,220,1)",
-                    pointStrokeColor : "#fff",
-                    pointHighlightFill : "#fff",
-                    pointHighlightStroke : "rgba(220,220,220,1)",
-                }
-            ]
-        }
+        labels: [],
+        datasets: [{
+            label: "My First dataset",
+            fillColor: "rgba(0, 92, 153,0.2)",
+            strokeColor: "rgba(220,220,220,1)",
+            pointColor: "rgba(220,220,220,1)",
+            pointStrokeColor: "#fff",
+            pointHighlightFill: "#fff",
+            pointHighlightStroke: "rgba(220,220,220,1)",
+        }]
+    }
 
     myDb.sortByDate(); //sorting by date
     var uniArr = myDb.unionDays(); //union repeated days
 
-    if(uniArr.count){
-       var from_date=uniArr.item[0].date;
-       var to_date=uniArr.item[uniArr.count-1].date;
-        lineChartData.labels=getXItem(from_date,to_date);
+    if (uniArr.count) {
+        var from_date = uniArr.item[0].date;
+        var to_date = uniArr.item[uniArr.count - 1].date;
+        lineChartData.labels = getXItem(from_date, to_date);
 
     }
 
 
-    lineChartData.datasets[0].data=[,,1000,2000,3000,2000,5000,3000,7000,2200,3010];
+    lineChartData.datasets[0].data = [, , 1000, 2000, 3000, 2000, 5000, 3000, 7000, 2200, 3010];
 
     var ctx = document.getElementById("canvas").getContext("2d");
-    var x=new Chart(ctx).Line(lineChartData, {
-            maintainAspectRatio: true,
-            responsive: true
-        });
+    var x = new Chart(ctx).Line(lineChartData, {
+        maintainAspectRatio: true,
+        responsive: true
+    });
 
 
 }
 
 
-/*date converting into format Date*/
-
-/**function count, which shows 3 rows on every click 'more' button*/
-
-var count = (function() {
-    var num = 0;
-    return function() {
-        var first = num;
-        num += 3;
-        for (var i = first; i < num + 3 && i <= myDb.count; ++i) {
-            document.getElementById("myTable").rows[i].style.display = "table-row";
-        }
-    }
-})()
-
-/**function, which hides all rows beside first three rows*/
-var hideOtherRows = function(number) {
-    for (var i = number; i <= myDb.count; ++i) {
-        document.getElementById("myTable").rows[i].style.display = "none";
-    }
-}
-
-/*adds row for new input*/
-function addRow()   
-{
-    var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    if(scrollTop>0){
-		scrollTop=(window.screen.height/2)-300+(scrollTop/16);
-	}
-    else{
-		scrollTop=(window.screen.height/2)-300;
-	}
-    document.getElementById("editWindow").style.top=(scrollTop)+"px";
-    document.getElementById("hellBg").style.display="block";
-    document.getElementById("editWindow").style.display="block";
-
-}
-// hides edit div after canceling or saveing
-function hideDiv()
-{
-    document.getElementById("hellBg").style.display="none";
-    document.getElementById("editWindow").style.display="none";     
-}
-// edits the row
-function editRow(i)
-{
-    addRow();
-    document.getElementById("Market").value=myDb.item[i].name;
-    document.getElementById("Date").value=myDb.item[i].date.toLocaleDateString();
-    document.getElementById("Time").value=myDb.item[i].date.toLocaleTimeString();
-    document.getElementById("Price").value=myDb.item[i].money;
-    document.getElementById("Item").value=myDb.item[i].item;
-
-
-}
-
-function table() 
-{
-    showGraph();
-    document.getElementById("editWindow").style.display="none"; 
+function table() {
+    // showGraph();
+    // document.getElementById("editWindow").style.display = "none";
     var myTable = document.getElementById("myTable");
     var header = myTable.createTHead();
     var headerRow = header.insertRow(0);
-     Head = ["Market", "Date", "Time", "Price", "Item"];
-    for (var i = 0; i < Head.length; ++i) 
-    {
+    Head = ["Market", "Date", "Time", "Price", "Item"];
+    for (var i = 0; i < Head.length; ++i) {
         var dataDate = headerRow.insertCell(i);
         dataDate.innerHTML = Head[i];
         dataDate.setAttribute("style", "font-weight: bold;");
 
-    }    
-                            
-    
-            
-    for (var i = 0; i < myDb.count; i++) 
-    {
-        tmp = myDb.item[i].getArray();
-    
-        var row = document.createElement("tr");
-    row.setAttribute('onclick','editRow('+i+')');
-        for (s in tmp) 
-    {
-    
-            var cell = document.createElement("td");
-            var cellText = document.createTextNode(tmp[s]);
-            cell.appendChild(cellText);
-            row.appendChild(cell);
-        }
-    
-    row.appendChild(document.createElement("td"));
-    myTable.appendChild(row);
     }
-     
-     
-    myTable.setAttribute("border", "2");
-    hideOtherRows(3);
+
+
+
 }
 
 
@@ -341,22 +257,3 @@ function progressSteps(idProgress, idCircle, idStep) {
 }
 
 
-function httpGet(theUrl)
-{
-
-    var xmlHttp = new XMLHttpRequest();
-    xmlHttp.open( "GET", 'http://127.0.0.1:8080/user/',true); 
-    xmlHttp.setRequestHeader('Content-Type', 'application/json');
-    xmlHttp.send();  
-    xmlHttp.onreadystatechange = function() { 
-       
-            if (xmlHttp.readyState != 4) return;
-
-            if (xmlHttp.status != 200) {
-                    alert(xmlHttp.status + ': ' + xmlHttp.statusText);
-            } else {
-                    alert(JSON.parse(xmlHttp.responseText).k);
-            }
-
-}
-}
