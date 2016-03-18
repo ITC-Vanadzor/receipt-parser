@@ -1,20 +1,21 @@
 <!DOCTYPE html>
 <html>
    <head>
+    <link rel="stylesheet" href="../css/style.css">
       <script src="../js/script.js" type="text/javascript"></script>
       <script src="../js/lib/Chart.js"></script>
       <script src="../js/lib/angular.min.js"></script>
       <script src = "../js/lib/angular-route.min.js"></script>
       <script src="../js/app.js"></script>
       <script src="../js/controller.js"></script>
-      <link rel="stylesheet" href="../css/style.css">
+     
       <title>HDM Statistic</title>
    </head>
    <body  ng-app="myApp" ng-controller="myCtrl" data-ng-init="showGraph()" onload="table()" class="webSiteBackground">
       <div ng-view></div>
-      <div class="styledBg canvasBg" >
+      <div  class="styledBg canvasBg" >
          <div>
-            <canvas  id="canvas"></canvas>
+            <canvas  id="canvas" ></canvas>
          </div>
       </div>
       <div>

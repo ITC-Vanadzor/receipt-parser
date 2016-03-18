@@ -141,7 +141,9 @@ app.controller('myCtrl', function($scope) {
     	}
     	console.log(lineChartData.labels);
     	console.log(lineChartData.datasets[0].data);
-       
+    
+ 
+
     var ctx = document.getElementById("canvas").getContext("2d");
     var x = new Chart(ctx).Line(lineChartData, {
         maintainAspectRatio: true,
