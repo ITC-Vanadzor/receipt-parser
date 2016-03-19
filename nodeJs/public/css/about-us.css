@@ -1,0 +1,18 @@
+/*
+HTML 5 Template Name: 
+File: About Us - 11 CSS
+Author: OS Templates
+Author URI: http://www.os-templates.com/
+Licence: <a href="http://www.os-templates.com/template-terms">Website Template Licence</a>
+*/
+
+#about-us{display:block; width:100%; line-height:1.6em;}
+#about-us h2{margin-bottom:40px; padding-bottom:40px; font-size:60px; text-align:center; text-transform:uppercase; border-bottom:1px solid #4d94ff; color:#4d94ff;} 
+
+#about-us #about-intro{margin-bottom:50px;}
+#about-us #about-intro p{margin:20px 0 0 0; padding:0;}
+#about-us #about-intro p:first-child{margin-top:0;}
+#about-us #about-intro .name{color:#4d94ff;border-bottom:1px solid #4d94ff}
+
+#about-us #columns{margin:0px auto; width:90%; margin-top:5%;}
+#about-us #column{float:left; margin:0; width:15%;}
