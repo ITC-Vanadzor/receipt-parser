@@ -1,25 +1,28 @@
+		
+
 	app.controller('usageController', function($scope, ngProgressFactory) {
-
-		      $scope.progressbar = ngProgressFactory.createInstance();
+		    $scope.progressbar = ngProgressFactory.createInstance();
               $scope.progressbar.start();
-              $scope.progressbar.set(60);
+              $scope.progressbar.set(32);
               $scope.progressbar.setHeight('10px');
-              $scope.progressbar.setColor('#fff');
+              $scope.progressbar.setColor('#007acc')
 
+
+		    
             
 	    //array for saving 3 versions  of show progress
-	   /* $scope.progressArray = [{
-	        progress: "progress[0]",
+	    $scope.progressArray = [{
+	        progress: 33,
 	        buttonStep: "buttonStep[0]",
 	        showDiv: 0,
 	        Step: "Step 1"
 	    }, {
-	        progress: "progress[1]",
+	        progress: 66,
 	        buttonStep: "buttonStep[1]",
 	        showDiv: 1,
 	        Step: "Step 2"
 	    }, {
-	        progress: "progress[2]",
+	        progress: 100,
 	        buttonStep: "buttonStep[2]",
 	        showDiv: 2,
 	        Step: "Step 3"
@@ -41,38 +44,28 @@
 
 	    // function, which dynamicly  show steps	
 	    $scope.showDiv = function(num) {
-	        var colorProgress = {
-	            "background": "#007acc"
-	        };
+	    	$scope.progressbar.set($scope.progressArray[num].progress);
+	       
 	        var blueButton = {
 	            "background": "linear-gradient(to top, #0094F7, #007acc)"
 	        };
-	        var grayProgress = {
-	            "background": "#bfbfbf"
-	        };
+	       
 	        var hideDiv = false;
 	        // at first hides all divs,colors steps blue,progress gray
 	        $scope.div = [hideDiv, hideDiv, hideDiv];
 	        $scope.buttonStep = [blueButton, blueButton, blueButton];
-	        $scope.progress = [grayProgress, grayProgress, grayProgress];
+	       
 	        // changes the  color of step gray and shows div		
 	        $scope.div[num] = true;
 	        $scope.buttonStep[num] = {
 	            "background": "#999999"
 	        };
-	        // for correspond step shows progress
-	        switch (num) {
-	            case 2:
-	                $scope.progress[2] = colorProgress;
-	            case 1:
-	                $scope.progress[1] = colorProgress;
-	            case 0:
-	                $scope.progress[0] = colorProgress;
-	        }
+	       
+	     
 
 	    }
 
-	    $scope.showDiv(0);*/
+	    $scope.showDiv(0);
 	});
 
 	/*app.controller('signInController', function($scope) {

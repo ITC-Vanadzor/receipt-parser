@@ -29,11 +29,11 @@
 
      <!--Usage div -->
       <div  ng-app="app" ng-controller="usageController" class="styledBg" id="sizeOfUsageBg" class="Progress" >
-              <div class="Progress" >
-                  <div  ng-repeat ="prog in progressArray" ng-style="{{prog.progress}}" >
-                     <button  ng-style="{{prog.buttonStep}}" ng-click="showDiv(prog.showDiv)" >{{prog.Step}}</button>
-                     </div>
-                   </div>
+          <div class="Progress" >
+                  <div  ng-repeat ="prog in progressArray" >
+                      <button  ng-style="{{prog.buttonStep}}" ng-click="showDiv(prog.showDiv)" >{{prog.Step}}</button>
+                  </div>
+          </div>
       <div ng-repeat ="show in showArray" >
          <div ng-show="{{show.div}}">
             <img class="usageImageSize"  ng-src = "{{show.src}}" alt="step"/>

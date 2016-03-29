@@ -319,11 +319,6 @@ input[type=date] {
 	margin:0%;
 	width: 32%;
 	height:10px;
-	border:1px  solid  gray;
-	background: #ffffff;
-	-webkit-border-radius: 5px;
-  	-moz-border-radius:  5px;
-  	border-radius:  5px;
 }
 /*each circle for steps*/
 .Progress button {
