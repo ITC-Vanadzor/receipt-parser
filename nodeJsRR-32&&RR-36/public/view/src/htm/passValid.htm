@@ -1,0 +1,4 @@
+<div ng-show="myForm.password.$dirty && myForm.password.$invalid">
+				<div ng-show="myForm.password.$error.required">Password is required.</div>
+				<div ng-show="myForm.password.$error.minlength">Password is shorter.</div>
+</div>  

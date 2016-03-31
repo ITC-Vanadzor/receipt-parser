@@ -1,0 +1,16 @@
+<div  ng-controller="signInController"   class="styledBg loginBgSize" >
+               <a href="index.html"><img src="../res/icon.png"  class="signInLogoSize"></a>
+
+         	<form action="user/login/" name="myForm" method="post">
+                   <input type="email" name="email"   ng-model="email" placeholder="Email" class="lightInput" required >
+                   <div ng-include="'./htm/emailValid.htm'"></div>
+		            <label>  <a href="#/forgotPassword" id="forgot">Forgot password? </a></label>
+                    <input  id="iPassword"type="password" ng-model="password"  ng-minlength="6" name="password" placeholder="Password" class="lightInput" required>
+                    <div ng-include="'./htm/passValid.htm'"></div>
+
+                	                    <label id="rememberStyle"><input  type="checkbox" name="remember"  >Remember me</label>
+                    <button  type="submit"  class="blueButton signInButtonSize">Sign In</button>	
+            	</form>
+		<div align="center"><label> <a href="#/signUp">Create an account </a></label></div>
+</div>
+
