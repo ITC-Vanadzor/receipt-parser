@@ -1,17 +1,23 @@
+		
 
-	/************Usage page**********************/
 	app.controller('usageController', function($scope) {
-
+	       
 	    //array for saving 3 versions  of show progress
 	    $scope.progressArray = [{
-	        step: "Step 1",
-		condition: "active"
+	        progress: 33,
+	        buttonStep: "buttonStep[0]",
+	        showDiv: 0,
+	        Step: "Step 1"
 	    }, {
-	        condition: "next",
-	        step: "Step 2"
+	        progress: 66,
+	        buttonStep: "buttonStep[1]",
+	        showDiv: 1,
+	        Step: "Step 2"
 	    }, {
-		condition: "",
-	        step: "Step 3"
+	        progress: 100,
+	        buttonStep: "buttonStep[2]",
+	        showDiv: 2,
+	        Step: "Step 3"
 	    }];
 	    //array for saving 3 versions of show divs
 	    $scope.showArray = [{
@@ -30,64 +36,60 @@
 
 	    // function, which dynamicly  show steps	
 	    $scope.showDiv = function(num) {
-	        var colorProgress = {
-	            "background": "#007acc"
-	        };
+	    	var progwidth=['33%','66%','100%'];
+	    
+	       $scope.progWidth={"width":progwidth[num]};
 	        var blueButton = {
 	            "background": "linear-gradient(to top, #0094F7, #007acc)"
 	        };
-	        var grayProgress = {
-	            "background": "#bfbfbf"
-	        };
+	       
 	        var hideDiv = false;
 	        // at first hides all divs,colors steps blue,progress gray
 	        $scope.div = [hideDiv, hideDiv, hideDiv];
 	        $scope.buttonStep = [blueButton, blueButton, blueButton];
-	        $scope.progress = [grayProgress, grayProgress, grayProgress];
+	       
 	        // changes the  color of step gray and shows div		
 	        $scope.div[num] = true;
 	        $scope.buttonStep[num] = {
 	            "background": "#999999"
 	        };
-	        // for correspond step shows progress
-	        switch (num) {
-	            case 2:
-	                $scope.progress[2] = colorProgress;
-	            case 1:
-	                $scope.progress[1] = colorProgress;
-	            case 0:
-	                $scope.progress[0] = colorProgress;
-	        }
+	       
+	     
 
 	    }
 
 	    $scope.showDiv(0);
 	});
 
-	/*******************signIn with 4 divs******************/
 	app.controller('signInController', function($scope) {
 
 
 	    //array for create acclount inputs
 	    $scope.createArray = [{
 	        name: "name",
+	        include: "./htm/nameValid.htm",
 	        place: "Username",
+	        min: 3,
 	        text: " This will be your username-you can enter your organization's username next.",
 	        type: "text"
 	    }, {
 	        name: "email",
+	        min: 5,
+	        include: "./htm/emailValid.htm",
 	        place: "Email",
 	        text: " You will occasionally receive  account related email. We promise not to share you email with anyone.",
-	        type: "text"
+	        type: "email"
 	    }, {
 	        name: "password",
 	        place: "Password",
+	        min: 6,
+	        include: "./htm/passValid.htm",
 	        text: " Use at least one lowercase letter, one numeral and seven characters",
 	        type: "password"
 	    }];
 
 	    //array for input profile datas
-	    $scope.profileInputArray = [{
+	   $scope.profileInputArray = [{
 	        name: "password",
 	        text: "Old Password"
 	    }, {
@@ -98,5 +100,3 @@
 	        text: "Repeat Password"
 	    }];
 	});
-
-	

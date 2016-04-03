@@ -1,28 +1,28 @@
 var app = angular.module("app", ['ngRoute']);
 
 app.config(['$routeProvider', function($routeProvider) {
-$routeProvider.
+   $routeProvider.
    
    when('/resetPassword', {
-      templateUrl: 'htm/resetPassword.htm', 
+      templateUrl: './htm/resetPassword.htm', 
       controller: 'signInController'
    }).
    
    when('/signUp', {
-      	templateUrl: 'htm/signUp.htm', 
-	controller: 'signInController'
+        templateUrl: './htm/signUp.htm', 
+  controller: 'signInController'
    }).
     when('/forgotPassword', {
-      	templateUrl: 'htm/forgotPassword.htm', 
-     	controller: 'signInController'
+        templateUrl: './htm/forgotPassword.htm', 
+      controller: 'signInController'
    }).
    when('/signIn',{
-	templateUrl: 'htm/signIn.htm',
-	controller: 'signInController'
+  templateUrl: './htm/signIn.htm',
+  controller: 'signInController'
 
    }).
    otherwise({
                redirectTo: '/signIn'
             });
-	
+  
 }]);

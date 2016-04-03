@@ -306,6 +306,28 @@ input[type=date] {
 /*Usage page*/
 
 /*usage big div background*/
+ #Progress{
+ 	float:left;
+	margin:0%;
+	width: 33.3%;
+	height:00.1px;
+	background: #bfbfbf;
+	 
+	border-radius: 0px;
+
+
+ }
+/* progress div container*/
+#progressBoot {
+	border-radius: 0px;
+	 width:48%;
+	height: relative;
+}
+/*progress exactly*/
+#progBlue{
+		margin: 0%;
+		border-radius: 0px;
+			}
 #sizeOfUsageBg{
 		padding:2%;
 		width: 50%;
@@ -313,15 +335,9 @@ input[type=date] {
     	min-height: 400px;
     	margin: 7% auto 2% auto;
 }
-/*progress size*/
-.Progress div{
-	float:left;
-	margin:0%;
-	width: 32%;
-	height:10px;
-}
+
 /*each circle for steps*/
-.Progress button {
+#Progress > button {
 		float:right;
 		color: white;
     		border: #005c99;
@@ -332,18 +348,18 @@ input[type=date] {
 		text-align:center;
       		width: 5%;
 		padding:1%;
-		margin:-1.5% 13%;
+		margin:-1.5% 11%;
 		min-width: 50px;
       		-webkit-border-radius: 70%;
       		-moz-border-radius: 70%;
       		border-radius: 70%;
     }
-.Progress button:hover {
+#Progress > button:hover {
 	cursor: pointer;  
     background: linear-gradient(to top, #0076C4, #007acc);
 }
 
-.Progress button:active {
+#Progress > button:active {
     background: linear-gradient(to top, #0064A6, #007acc);
 }
 
@@ -361,21 +377,7 @@ input[type=date] {
 	padding:1%;
 	text-align:left;
 }
-/*size of div for image*/
 
-/*show first image and text*/
-#firstStep{
-	display:block;
-
-}
-#secondStep{
-	display:none;
-
-}
-#thirdStep{
-	display:none;
-
-}
 
 /*size of images for usage */
 .usageImageSize{
