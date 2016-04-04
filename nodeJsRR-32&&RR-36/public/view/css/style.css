@@ -310,13 +310,15 @@ input[type=date] {
  	float:left;
 	margin:0%;
 	width: 33.3%;
-	height:00.1px;
+	height:10px;
 	background: #bfbfbf;
 	 
 	border-radius: 0px;
 
 
  }
+
+
 /* progress div container*/
 #progressBoot {
 	border-radius: 0px;
@@ -339,29 +341,27 @@ input[type=date] {
 /*each circle for steps*/
 #Progress > button {
 		float:right;
-		color: white;
-    		border: #005c99;
-    		background: linear-gradient(to top, #0094F7, #007acc);
+		/*color: white;*/
+    		/*border: #005c99;*/
+    		/*background: linear-gradient(to top, #0094F7, #007acc);*/
     		font-size: 100%;
 		position:absolute;
     		font-weight: bold;
 		text-align:center;
-      		width: 5%;
-		padding:1%;
-		margin:-1.5% 11%;
-		min-width: 50px;
-      		-webkit-border-radius: 70%;
-      		-moz-border-radius: 70%;
-      		border-radius: 70%;
+      		width: 11%;
+      	padding:1%;
+		margin:-1.5% 2%;
+		/*min-width: 50px;*/
+      	
     }
-#Progress > button:hover {
+/*#Progress > button:hover {
 	cursor: pointer;  
     background: linear-gradient(to top, #0076C4, #007acc);
 }
 
 #Progress > button:active {
     background: linear-gradient(to top, #0064A6, #007acc);
-}
+}*/
 
 
 /* Size of Div for Usage rules*/
