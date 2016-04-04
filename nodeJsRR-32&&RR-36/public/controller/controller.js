@@ -40,7 +40,8 @@
 	    
 	       $scope.progWidth={"width":progwidth[num]};
 	        var blueButton = {
-	            "background": "linear-gradient(to top, #0094F7, #007acc)"
+	        	 "background-color": "#0094F7",
+	            // "background": "linear-gradient(to top, #0094F7, #007acc)"
 	        };
 	       
 	        var hideDiv = false;
