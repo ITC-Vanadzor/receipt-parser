@@ -7,17 +7,17 @@
 	        progress: 33,
 	        buttonStep: "buttonStep[0]",
 	        showDiv: 0,
-	        Step: "Step 1"
+	        Step: "1"
 	    }, {
 	        progress: 66,
 	        buttonStep: "buttonStep[1]",
 	        showDiv: 1,
-	        Step: "Step 2"
+	        Step: " 2"
 	    }, {
 	        progress: 100,
 	        buttonStep: "buttonStep[2]",
 	        showDiv: 2,
-	        Step: "Step 3"
+	        Step: "3"
 	    }];
 	    //array for saving 3 versions of show divs
 	    $scope.showArray = [{

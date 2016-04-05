@@ -123,8 +123,8 @@ a {
 /* size of login Bg*/
 .loginBgSize {
 width: 30%;
-min-width: 300px;
-min-height: 340px;
+min-width: 500px;
+min-height: 350px;
 padding: 0% 1% 4% 1%;
 margin: 100px auto 2% auto;
 }
