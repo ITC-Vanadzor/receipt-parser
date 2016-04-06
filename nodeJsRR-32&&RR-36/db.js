@@ -1,9 +1,9 @@
 var mySql = require('mysql');
 var db = mySql.createConnection({
     host: 'localhost',
-    user: 'hdmUser',
-    password: 'hdmpassword',
-    database: 'hdmUsers'
+    user: 'TUXroot',
+    password: 'TUXroot',
+    database: 'TUXhdm'
 });
 
 db.query('CREATE TABLE IF NOT EXISTS accounts(\

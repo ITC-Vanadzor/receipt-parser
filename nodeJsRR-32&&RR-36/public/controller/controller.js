@@ -72,7 +72,7 @@
 	        min: 3,
 	        text: " This will be your username.",
 	        type: "text",
-	         error: " Your username  must be required  between 3 and 10 characters long.",
+	         rederror: " Your username  must be required  between 3 and 10 characters long.",
 	         pattern: "",
 	         message: "userForm.name.$error"
 	    }, {
@@ -83,7 +83,7 @@
 	        place: "Email",
 	        text: " You will occasionally receive  account related email.",
 	        type: "email",
-	        error: " Your email must be between 10 and 100 characters long and look like an e-mail address.",
+	        rederror: " Your email must be  look like an e-mail address.",
 	        pattern: "/^.+@.+\..+$/",
 	        message: "userForm.email.$error"
 	    }, {
@@ -92,9 +92,9 @@
 	        min: 6,
 	        max: 15,
 	        include: "./htm/passValid.htm",
-	        text: " Use at least one lowercase letter, one numeral and six characters",
+	        text: " Use at least  six characters",
 	        type: "password",
-	        error: " Your password  must be more than 6 characters long.",
+	        rederror: " Your password  must be more than 6 characters long.",
 	        pattern: "",
 	        message: "userForm.password.$error"
 	    }, ];

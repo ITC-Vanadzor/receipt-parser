@@ -172,12 +172,14 @@ margin-top: 2%;
 font-size: 0.85em;
 }
 #forgotTextAbove {
-margin: 5% 10% 0% 10%;
+margin: 5% 8% 8% 0%;
+font-size: 100%;
+text-align: center;
 }
 /*Remember me style*/
 #rememberStyle {
 float: left;
-margin-left: 0%;
+margin-left: 9%;
 font-weight: bold;
 margin-top: 0%;
 color: gray;
@@ -473,5 +475,42 @@ input[type=date] {
   .inputdemoErrorsAdvanced .hint.ng-enter.ng-enter-active {
     bottom: 7px;
     opacity: 1; }
+  .md-char-counter{
 
+    	color:gray;
+    }
+   .hint {
+   	margin-top:0%;
+   }
+  #myId  md-switch.md-default-theme.md-checked ._md-thumb, md-switch.md-checked ._md-thumb {
+    background-color: #0094F7;
+}
+
+.myId md-switch.md-default-theme.md-checked ._md-bar, md-switch.md-checked ._md-bar{
+	background-color: gray;
+}
+.myHint{
+	margin-top:0%;
+	height: 20px;
+	margin-left: 5%;
+}
+md-input-container{
+	margin-bottom: 0%;
+	margin-top: 0%;
+
+}
+html.md-default-theme, html, body.md-default-theme, body {
+    color: transparent;
+    background-color: transparent;
+}
+md-block .lightInput flex-gt-sm{
+	margin-top:0%
+	margin-bottom:0%;
+
+}
+ng-valid ng-dirty ng-valid-parse ng-touched md-checked ng-not-empty{
+    margin-top:0%
+	margin-bottom:0%;
+   height: 1px;	
+}
       </style>
