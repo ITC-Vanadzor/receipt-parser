@@ -1,6 +1,4 @@
-		
-
-	app.controller('usageController', function($scope) {
+  app.controller('usageController', function($scope) {
 	       
 	    //array for saving 3 versions  of show progress
 	    $scope.progressArray = [{
@@ -64,30 +62,44 @@
 
 	app.controller('signInController', function($scope) {
 
-
+        $scope.showHints = true;
 	    //array for create acclount inputs
 	    $scope.createArray = [{
 	        name: "name",
 	        include: "./htm/nameValid.htm",
 	        place: "Username",
+	        max: 10,
 	        min: 3,
-	        text: " This will be your username-you can enter your organization's username next.",
-	        type: "text"
+	        text: " This will be your username.",
+	        type: "text",
+	         error: " Your username  must be required  between 3 and 10 characters long.",
+	         pattern: "",
+	         message: "userForm.name.$error"
 	    }, {
 	        name: "email",
 	        min: 5,
+	        max: 30,
 	        include: "./htm/emailValid.htm",
 	        place: "Email",
-	        text: " You will occasionally receive  account related email. We promise not to share you email with anyone.",
-	        type: "email"
+	        text: " You will occasionally receive  account related email.",
+	        type: "email",
+	        error: " Your email must be between 10 and 100 characters long and look like an e-mail address.",
+	        pattern: "/^.+@.+\..+$/",
+	        message: "userForm.email.$error"
 	    }, {
 	        name: "password",
 	        place: "Password",
 	        min: 6,
+	        max: 15,
 	        include: "./htm/passValid.htm",
-	        text: " Use at least one lowercase letter, one numeral and seven characters",
-	        type: "password"
-	    }];
+	        text: " Use at least one lowercase letter, one numeral and six characters",
+	        type: "password",
+	        error: " Your password  must be more than 6 characters long.",
+	        pattern: "",
+	        message: "userForm.password.$error"
+	    }, ];
+
+	    $scope.signInArray=[$scope.createArray[1],$scope.createArray[2],];
 
 	    //array for input profile datas
 	   $scope.profileInputArray = [{

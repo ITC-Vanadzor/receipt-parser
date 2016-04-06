@@ -1,4 +1,4 @@
-var app = angular.module("app", ['ngRoute']);
+var app = angular.module("app", ['ngRoute','ngMaterial', 'ngMessages', 'material.svgAssetsCache']);
 
 app.config(['$routeProvider', function($routeProvider) {
    $routeProvider.

@@ -97,12 +97,8 @@ color: #4d94ff;
 }
 /*styled input*/
 .lightInput {
-border-style: solid;
-border-width: 1px;
-border-color: #B2B0B0;
 padding: 10px  10px;
 font-size: 80%;
-border-radius: 5px;
 margin-top: 5%;
 width: 75%;
 }
@@ -110,7 +106,7 @@ width: 75%;
 box-shadow: 0 0 10px 3px rgba(77, 77, 255, .55);
 }
 /*styled  background*/
-.styledBg {
+.styledBg  , #styledSignUpBg {
 background: linear-gradient(to top, #e8e8e8, #bfbfbf);
 box-shadow: 0 0 10px 3px rgba(128, 128, 128, .55);
 border-radius: 10px;
@@ -121,7 +117,7 @@ a {
 
 }
 /* size of login Bg*/
-.loginBgSize {
+.loginBgSize, #singUpBg{
 width: 30%;
 min-width: 500px;
 min-height: 350px;
@@ -157,6 +153,7 @@ margin-left: 5%;
 /*	margin-left:35%;*/
 width: 30%;
 margin-top: 5%;
+margin-bottom:0%;
 }
 /*menu bar small logo*/
 #smallogo {
@@ -180,9 +177,9 @@ margin: 5% 10% 0% 10%;
 /*Remember me style*/
 #rememberStyle {
 float: left;
-margin-left: 9.5%;
+margin-left: 0%;
 font-weight: bold;
-margin-top: 3%;
+margin-top: 0%;
 color: gray;
 font-size: 90%;
 }
@@ -290,9 +287,12 @@ input[type=date] {
 /* registration page*/
 
 .textUnderRegInput {
-    text-align: left;
+    
     font-size: 85%;
-    margin: 1% 10.5%;
+    margin: 1% 0%;
+    width:100%;
+    float:left;
+
  
 }
 .regInputSize {
@@ -448,13 +448,30 @@ input[type=date] {
 	margin: 3.8%;
 }
 /*added by Ani for angularJs for validation sign-in input fields*/
-form >div{
-		color:red;
-		font-size: 12px;
-		float:left;	
-		margin-left:10%;
-		margin-bottom: 0%;	
-	}
-	input.ng-invalid.ng-touched, 	input.ng-error.ng-touched, 	input.ng-required.ng-touched{
-	    border-color: red;
-	} 
+<style type="text/css">
+.inputdemoErrorsAdvanced {
+  /* NOTE: Check the demo's HTML to see some additional RTL support CSS */
+  /* Setup animations similar to the ng-messages */ }
+  .inputdemoErrorsAdvanced .hint {
+    /* Position the hint */
+    position: absolute;
+    left: 2px;
+    right: auto;
+    bottom: 7px;
+    /* Copy styles from ng-messages */
+    font-size: 12px;
+    line-height: 14px;
+    transition: all 0.3s cubic-bezier(0.55, 0, 0.55, 0.2);
+    /* Set our own color */
+    color: gray; }
+  .inputdemoErrorsAdvanced .hint.ng-hide,
+  .inputdemoErrorsAdvanced .hint.ng-enter,
+  .inputdemoErrorsAdvanced .hint.ng-leave.ng-leave-active {
+    bottom: 26px;
+    opacity: 0; }
+  .inputdemoErrorsAdvanced .hint.ng-leave,
+  .inputdemoErrorsAdvanced .hint.ng-enter.ng-enter-active {
+    bottom: 7px;
+    opacity: 1; }
+
+      </style>
