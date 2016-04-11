@@ -53,6 +53,7 @@ module.exports.get = function(req, res) {
 
 
 module.exports.signIn = function(req, res,next) {
+   console.log("-----------------------");
    var data = req.body;
    console.log(data);
     passport.authenticate('local', function(err, user, message) {
