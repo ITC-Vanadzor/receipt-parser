@@ -63,7 +63,7 @@ module.exports.signIn = function(req, res,next) {
             //     user: user,
             //     token: generateToken(user)
             // });
-            res.render('src/statistic.html');
+            res.render('view/src/statistic.html');
         } else {
             res.end('cant\'t  logined');
         }
