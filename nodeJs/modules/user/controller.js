@@ -53,42 +53,33 @@ module.exports.get = function(req, res) {
 
 
 module.exports.signIn = function(req, res,next) {
-   console.log("-----------------------");
    var data = req.body;
-   console.log(data);
     passport.authenticate('local', function(err, user, message) {
         if (user) {
-            // res.json({
-            //     message: message,
-            //     user: user,
-            //     token: generateToken(user)
-            // });
-            res.render('view/src/statistic.html');
+            res.render('src/statistic.html', {
+                token: generateToken(req.body.email)});
         } else {
-            res.end('cant\'t  logined');
+           res.end('cant\'t  logined');
         }
     })(req, res, next);
 };
 
 module.exports.signUp = function(req, res) {
-
-    console.log(req.user)
     var data = req.body;
     User.create(data, function(err) {
         if (err) {
             res.end('can\'t create user')
         } else {
-            res.end('user was created');
+            res.render('src/statistic.html', {
+                token: generateToken(req.body.email)});
         }
     });
 
 };
 
-
 var generateToken = function(user) {
     var token = jsonwebtoken.sign(user, 'XXX', {
         expiresInMinutes: 12 //minit
     });
-    console.log(token);
     return token;
 };

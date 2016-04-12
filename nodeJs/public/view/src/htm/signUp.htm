@@ -1,42 +1,37 @@
-
  <div ng-controller="signInController" layout="column" ng-cloak="" id="singUpBg" class="inputdemoErrorsAdvanced styledBg  ">
    <a href="../../index.html"><img src="../res/icon.png"  class="signInLogoSize"></a>
 
   <md-content layout-padding="" style="background: transparent;margin-top: 0% ">
-    <form name="userForm" method="post" action="/user/">
+    <form name="userForm" method="post" action="/statistics/">
+       
        <div   layout="row"   layout-xs="column" layout-sm="column" layout-align="space-between left">
           <md-input-container class="myHint" style="padding:0%">
              <md-switch style="color:gray"  ng-model="showHints">Showing {{showHints ? "Hints" : "Errors"}}</md-switch>
          </md-input-container>
         </div>
+     
 
-      <div  style=" margin:0%";  ng-repeat="fields in signInArray" layout-gt-sm="row">
+      <div  style=" margin:0%";  ng-repeat="fields in createArray" layout-gt-sm="row">
            <md-input-container   class="md-block lightInput" flex-gt-sm="">
                   <label style="text-align: left">{{fields.place}}</label>
                   <input   md-maxlength="{{fields.max}}" type="{{fields.type}}" required minlength="{{fields.min}}" name="{{fields.name}}"  ng-model="user.name">
-                  <div class="hint" ng-if="showHints">{{fields.text}}</div>
+               <div class="hint" ng-if="showHints">{{fields.text}}</div>
 
-                  <div style=" margin-top:0%" ng-messages="userForm.email.$error" ng-hide="showHints">   
+               <div style=" margin-top:0%" ng-messages="userForm.email.$error" ng-if="!showHints">   
                      <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
-                     {{fields.rederror}}
-                      
+                      {{fields.rederror}}
                      </div>
-                  </div>
+               </div>
             
          </md-input-container>
       </div>
-       <label id="rememberStyle"><input  type="checkbox" name="remember"  >Remember me</label>
-       <label>  <a href="#/forgotPassword" id="forgot" style="margin:0%">Forgot password? </a></label>
 
-    <button tyle="margin-top:0%;" type="submit" class ="signInButtonSize blueButton ">Sign In</button> 
+     <button  style="margin-top:0%;"type="submit" class ="signInButtonSize blueButton ">Create an account</button>
    </form>
 </md-content>
- 
-
-
-<div align="center"><label> <a href="#/signUp" style="color: #5FA5FF;">Create an account </a></label></div>
 
 </div>
+
 <!--
 Copyright 2016 Google Inc. All Rights Reserved. 
 Use of this source code is governed by an MIT-style license that can be in foundin the LICENSE file at http://material.angularjs.org/license.

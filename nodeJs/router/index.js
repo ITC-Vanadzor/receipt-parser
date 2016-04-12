@@ -20,5 +20,5 @@ module.exports = function (app) {
 		jwt(jwtConf)
 		.unless({path:['/user/registration']})
 		);
-	app.use('/user', router());
+	app.use('/', router());
 }

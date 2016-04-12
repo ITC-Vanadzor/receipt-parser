@@ -3,7 +3,7 @@ var joi = require('joi');
 var sha256 = require('js-sha256');
 
 var joiSchema = joi.object().keys({
-    username: joi.string().alphanum().min(3).max(30),
+    name: joi.string().alphanum().min(3).max(30),
     email: joi.string().email().required(),
     password: joi.string().regex(/^[a-zA-Z0-9]{6,30}$/).required()
 });
@@ -16,11 +16,11 @@ User.prototype.create = function(data, callback) {
     validateUserData(data, function(err, data) {
         if (!err) {
             var password = transformPasword(data.password);
-            password = sha256(password);
-            console.log('pass....',password);
-            var query = 'INSERT INTO accounts set email = "' + data.email + '", username="'+data.username+'", password = "' + password + '"';
+            encodePassword = sha256(password);
+            var query = 'INSERT INTO accounts set email = "' + data.email + '", username="'+data.name+'", password = "' + encodePassword + '"';
             db.query(query, function(err, success) {
                 if ('function' === typeof callback) {
+                    
                     callback(err)
                 }
             });
@@ -37,7 +37,7 @@ User.prototype.signin = function(data, callback) {
         if (!err) {
             var password = transformPasword(data.password);
             password = sha256(password);
-            var query = 'SElECT * from accounts where email = "' + data.email + '" and password="' + password + '"';
+            var query = 'SElECT * from testbase.accounts where email = "' + data.email + '" and password="' + password + '"';
             db.query(query, function(err, rows) {
                 var user = rows && rows.length ? rows[0] : null;
 

@@ -7,7 +7,7 @@ var router = express.Router();
 module.exports = function() {
   router.get('/', controller.get);
   router.post('/',  controller.signIn);  
-  router.post('/registration/',controller.signUp);
+  router.post('/statistics/',controller.signUp);
 
   return router;
 };
