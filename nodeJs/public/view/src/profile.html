@@ -2,9 +2,22 @@
 
 <!DOCTYPE html>
 <html>
-<head>
-  <title>HDM User Profile</title>
-  <link rel="stylesheet" href="../css/style.css">
+  <head>
+ 
+      <title>Sign In HDM</title>
+      <link rel="stylesheet" href="../css/style.css">
+      <script src="../../libs/angular.js"></script>
+      <script src="../../app/app.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0rc1/angular-route.min.js"></script> 
+      <script src="../../controller/controller.js"></script>
+      <link rel="stylesheet" type="text/css" href="https://cdn.gitcdn.link/cdn/angular/bower-material/v1.1.0-rc2/angular-material.css">
+      <link rel="stylesheet" type="text/css" href="https://material.angularjs.org/1.1.0-rc2/docs.css">
+      <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js"></script>
+      <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.min.js"></script>
+      <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js"></script>
+      <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js"></script>
+      <script type="text/javascript" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/t-114/svg-assets-cache.js"></script>
+      <script type="text/javascript" src="https://cdn.gitcdn.link/cdn/angular/bower-material/v1.1.0-rc2/angular-material.js"></script>
   <script>
     function previewFile(){
               var preview = document.getElementById('pict'); //query -i @ntraci anun@ 'img' a
@@ -28,73 +41,16 @@
           }
         </script>
       </head>
-      <body  onload="previewFile()" class="webSiteBackground">
- <ul>
-         <a class="active" href="index.html"><img src="../res/icon.png" id="smallogo"></a>
-         <li><a href="#about">About us</a></li>
-         <li><a href="usage.html">How to use</a></li>
-         <li><a href="#download">Download</a></li>
-         <div>
-            <a href="signin.html"    class="blueButton menuBarButtonSize" >Log out</a>
-            <a href="profile.html"   class="grayButton menuBarButtonSize">Profile</a>
-         </div>
-      </ul>
+    <body ng-controller="Profile"  ng-app="app" onload="previewFile()" class="webSiteBackground">
+
+            <div class="profileImg" onclick="browsFile()"><img width="80%" id="pict"  src="" ><input id="brs" type="file" onchange="previewFile()" style="opacity: 0;" ></div>
+            <div    class="profileDivSize">      
+                <ng-include src="'htm/profile.htm'"></ng-include>
+                <ng-include src="'htm/resetPassword.htm'"></ng-include>
+            </div>
 
 
-        <div class="profileImg" onclick="browsFile()"><img width="200" id="pict"  src="" ><input id="brs" type="file" onchange="previewFile()" style="opacity: 0;" ></div>
-
-
-
-   <div class="profileDivSize">      
-
-            <div class="profileDivSize1 styledBg">
-              
-              <p class="headStyle">Profile</p>
-              
-              <div class="profileInputs">
-                <input type="text" name="name" class="lightInput profileInputSize" >
-                <input type="text" name="surname"  class="lightInput profileInputSize">
-                <input type="text" name="email"   class="lightInput profileInputSize">
-                <input type="text" name="date"   placeholder="dd.mm.yyyy" class="lightInput profileInputSize">
-              </div>
-
-              <div class="profileLabels">
-                <p class="profileLabelsTop1">Name</p>
-                <p class="profileLabelsTop1">Surname</p>
-                <p class="profileLabelsTop1">Email</p>
-                <p class="profileLabelsTop1">Birthday</p>
-              </div>
-
-               <button class="blueButton profileButtonSize" >Update profile</button></div>
-
-
-            <div class="profileDivSize1 styledBg">
-
-              <p class="headStyle">Account settings</p>
-
-              <div class="profileInputs">
-                <input type="password" name="password"  class="lightInput profileInputSize">
-                <input type="password" name="newpass"  class="lightInput profileInputSize">
-                <input type="password" name="repass"  class="lightInput profileInputSize">
-             </div>
-
-              <div class="profileLabels">
-                <p class="profileLabelsTop1">Password</p>
-                <p class="profileLabelsTop1">New Password</p>
-                <p class="profileLabelsTop1">Repeat Password</p>
-              </div>
-              
-              <button class="blueButton profileButtonSize" >Change password</button>
-            </div> 
-
-</div>
-
-
-
-
-
-
-</body>
+    </body>
 </html>
 
 
