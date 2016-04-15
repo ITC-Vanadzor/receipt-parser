@@ -75,34 +75,36 @@
 }
 
 .steps span{
+  z-index: 1300;
   display: block;
+  font-size: 25px;
   padding-left: 40px;
+  padding-bottom: 20px;
   overflow: hidden;
   text-overflow: ellipsis;
   width: 100%;
   height: 75%;
   vertical-align: middle;
   border:none;
+  text-align: center;
 }
 
 .steps span:before{
-  content: counter(steps) ". ";
+  z-index: 11;
+/*  content: counter(steps) ". ";*/
 }
 .steps.active span{
   font-weight: bold;  
 }
 .steps.active:before,
 .steps.active:after {
+  z-index: 11;
   background: #0094F7;
 }
 
 /* Just for demo */
 html,
-body {
-  font-family: Calibri, Tahoma;
-  height: 400px;
-  background: linear-gradient(90deg, #803689, #5eb6e4);
-}
+
 input[type="range"]{
   vertical-align: middle;
 }
@@ -117,28 +119,20 @@ label{
     
 </head>
 
-   <body  class="webSiteBackground">
+   <body >
 
      <!--Usage div -->
       <div  ng-app="app" ng-controller="usageController" class="styledBg  " id="sizeOfUsageBg" >
 <script class="cssdeck" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
-                 >
-           <div class='steps-container' >
+                 
+                <div class='steps-container' >
                    <label ng-repeat ="prog in progressArray">
                           <div  ng-click="showDiv(prog.showDiv)"  ng-class="{true: 'active steps', false: 'steps'}[isActive[prog.showDiv]]">
-                            <span style=" position:absolute;color:red" >{{prog.Step}}</span>
+                            <span style=" position:absolute;color:white;" >Step {{prog.Step}}</span>
                           </div>
                          </label>
            </div>
-        
-          
-
-
-
-
-
-
-            <div ng-repeat ="show in showArray" >
+          <div ng-repeat ="show in showArray" >
                 <div ng-show="{{show.div}}">
                     <img class="usageImageSize"  ng-src = "{{show.src}}" alt="step"/>
                     <p class="usageText"  >{{show.text}}</p>

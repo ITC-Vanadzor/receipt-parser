@@ -338,8 +338,8 @@ input[type=date] {
 /*size of images for usage */
 .usageImageSize{
 	float:left;
-	margin:5% 0% 4%  2%;
-	width: 45%;
+	margin:2% 0% 4%  2%;
+	width: 40%;
 }
 /*end of usage page*/
 
