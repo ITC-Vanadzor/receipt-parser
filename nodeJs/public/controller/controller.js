@@ -2,21 +2,19 @@
 	       
 	    //array for saving 3 versions  of show progress
 	    $scope.progressArray = [{
-	        progress: 33,
-	        buttonStep: "buttonStep[0]",
 	        showDiv: 0,
 	        Step: "1"
 	    }, {
-	        progress: 66,
-	        buttonStep: "buttonStep[1]",
+	       
 	        showDiv: 1,
 	        Step: " 2"
 	    }, {
-	        progress: 100,
-	        buttonStep: "buttonStep[2]",
+	       
+	       
 	        showDiv: 2,
 	        Step: "3"
 	    }];
+
 	    //array for saving 3 versions of show divs
 	    $scope.showArray = [{
 	        div: "div[0]",
@@ -34,9 +32,10 @@
 
 	    // function, which dynamicly  show steps	
 	    $scope.showDiv = function(num) {
-	    	var progwidth=['33%','66%','100%'];
-	    
-	       $scope.progWidth={"width":progwidth[num]};
+	    	$scope.isActive=[false,false,false]
+	    	$scope.isActive[num]=true;
+	        
+	      
 	        var blueButton = {
 	        	 "background-color": "#0094F7",
 	            // "background": "linear-gradient(to top, #0094F7, #007acc)"

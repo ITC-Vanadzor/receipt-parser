@@ -309,30 +309,7 @@ input[type=date] {
 /*Usage page*/
 
 /*usage big div background*/
- #Progress{
- 	float:left;
-	margin:0%;
-	width: 33.3%;
-	height:10px;
-	background: #bfbfbf;
-	 
-	border-radius: 0px;
 
-
- }
-
-
-/* progress div container*/
-#progressBoot {
-	border-radius: 0px;
-	 width:48%;
-	height: relative;
-}
-/*progress exactly*/
-#progBlue{
-		margin: 0%;
-		border-radius: 0px;
-			}
 #sizeOfUsageBg{
 		padding:2%;
 		width: 50%;
@@ -341,30 +318,6 @@ input[type=date] {
     	margin: 7% auto 2% auto;
 }
 
-/*each circle for steps*/
-#Progress > button {
-		float:right;
-		/*color: white;*/
-    		/*border: #005c99;*/
-    		/*background: linear-gradient(to top, #0094F7, #007acc);*/
-    		font-size: 100%;
-		position:absolute;
-    		font-weight: bold;
-		text-align:center;
-      		width: 11%;
-      	padding:1%;
-		margin:-1.5% 2%;
-		/*min-width: 50px;*/
-      	
-    }
-/*#Progress > button:hover {
-	cursor: pointer;  
-    background: linear-gradient(to top, #0076C4, #007acc);
-}
-
-#Progress > button:active {
-    background: linear-gradient(to top, #0064A6, #007acc);
-}*/
 
 
 /* Size of Div for Usage rules*/
@@ -386,7 +339,7 @@ input[type=date] {
 .usageImageSize{
 	float:left;
 	margin:5% 0% 4%  2%;
-	width: 55%;
+	width: 45%;
 }
 /*end of usage page*/
 
