@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html >
+   <head>
+      <meta name="viewport" content="width=device-width">
+      <link rel="stylesheet" href="/view/css/style.css">
+      <link rel="stylesheet" href="/libs/md/css/angular-material.css">
+      <link rel="stylesheet" href="/libs/md/css/docs.css">
+      <link rel="stylesheet" href="/libs/md/css/noname.css">
+      <link rel="shortcut icon" href="/view/res/icon.png" type="image/png">
+      <script src="/libs/angular.min.js"></script>
+      <script src = "/libs/angular-route.min.js"></script>
+      <script src="/libs/Chart.js"></script>
+      <script src="/libs//md/js/angular.js"></script>
+      <script src="/libs/md/js/angular-animate.min.js"></script>
+      <script src="/libs/md/js/angular-route.min.js"></script>
+      <script src="/libs/md/js/angular-aria.min.js"></script>
+      <script src="/libs/md/js/angular-messages.min.js"></script>
+      <script src="/libs/md/js/svg-assets-cache.js"></script>
+      <script src="/libs/md/js/angular-material.js"></script>
+      <script src="/libs/jquery.min.js"></script>
+      <script src="/app/app.js"></script>
+      <script src="/controller/controller.js"></script>
+      <title>Profile</title>
+   </head>
+   <script>
+      function previewFile(){
+                var preview = document.getElementById('pict'); //query -i @ntraci anun@ 'img' a
+                var file    = document.querySelector('input[type=file]').files[0]; //nuyn bann @stegh
+                var reader  = new FileReader();
+                reader.onloadend = function () {
+                  preview.src = reader.result;
+                }
+                if (file) {
+                reader.readAsDataURL(file); //tvyalner@ kkarda vorpes URL
+              } 
+              else {
+      
+                preview.src = "../res/profile.png";
+              }
+            }                             
+      
+      
+            function browsFile(){
+              document.getElementById('brs').click();
+            }
+          
+   </script>
+   <body ng-controller="signInController"  ng-app="app" onload="previewFile()" class="webSiteBackground">
+      <div ng-include="'/view/src/htm/menubar.htm'"></div>
+      <div class="profileImg" onclick="browsFile()"><img width="100%" id="pict"  src="" ><input id="brs" type="file" onchange="previewFile()" style="opacity: 0;" ></div>
+      <div    class="profileDivSize">
+         <ng-include src="'/view/src/htm/profile.htm'"></ng-include>
+         <ng-include src="'/view/src/htm/resetPassword.htm'"></ng-include>
+      </div>
+   </body>
+</html>
