@@ -1,0 +1,22 @@
+  <div align="center" layout="column" ng-cloak="" id="singUpBg" class="inputdemoErrorsAdvanced styledBg  ">
+         <a href="/"><img src="/view/res/icon.png"  class="signInLogoSize"></a>
+         <md-content layout-padding="" style="background: transparent;margin-top: 0% ">
+         <div ng-show="signinError"style="top: 0;left: 30%;color: red;font-size: medium;" class="hint">Invalid registration data </div>
+            <form name="userForm" method="post" action="/registration/statistic">
+               <div  style=" margin:0%";  ng-repeat="fields in createArray" layout-gt-sm="row">
+                  <md-input-container   class="md-block lightInput" flex-gt-sm="">
+                     <label style="text-align: left">{{fields.place}}</label>
+                     <input style="margin-bottom: 2%"  md-maxlength="{{fields.max}}" type="{{fields.type}}" required minlength="{{fields.min}}" name="{{fields.name}}"  ng-model="user.name">
+                     <div style="margin-left:2%" class="hint">{{fields.text}}</div>
+                     <div  ng-messages="userForm.email.$error"   role="alert">
+                        <div style="float:left; margin-bottom:3%" ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
+                           {{fields.rederror}}
+                        </div>
+                     </div>
+                  </md-input-container>
+               </div>
+               <button  style="margin-top:0%;"type="submit" class ="signInButtonSize blueButton ">Create an account</button>
+            </form>
+         </md-content>
+      </div>
+      </div>

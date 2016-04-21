@@ -60,6 +60,13 @@
    });
 
    app.controller('signInController', function($scope) {
+          console.log(location.hash);
+       if(location.hash=="#/loginError" || location.hash=="#/registerError"){
+            $scope.signinError=true;
+          }
+          else {
+            $scope.signinError=false;
+          }
 
        $scope.showHints = true;
        //array for create acclount inputs
@@ -121,44 +128,50 @@
        }];
    });
 
-   app.controller('menuBarCtl', function($scope) {
+   app.controller('menuBarCtl', function($scope,isLogined) {
        $scope.homeUrl = "/";
-       $scope.aboutUrl = "/about";
-       $scope.downloadUrl = "/download";
-       $scope.usageUrl = "/usage";
-       $scope.signInUrl = "/signin";
-       $scope.signUpUrl = "/signup";
+       $scope.aboutUrl = "/#/about";
+       $scope.downloadUrl = "/#/download";
+       $scope.usageUrl = "/#/usage";
+       $scope.signInUrl = "/login/#/signin";
+       $scope.signUpUrl = "/login/#/signup";
        $scope.profileUrl = "/profile";
        $scope.exitUrl = "/";
 
-
-       $scope.profileDisabled = true
        $scope.aboutDisabled = false;
        $scope.usageDisabled = false;
        $scope.downloadDisabled = false;
+  
+       $scope.profileDisabled=!isLogined.logined;
+       
 
        $scope.webToolbar = true;
        switch (location.pathname) {
-           case '/usage':
-               $scope.usageDisabled = true;
-               break;
-           case '/download':
-               $scope.downloadDisabled = true;
-               break;
-           case '/about':
-               $scope.aboutDisabled = true;
-               break;
            case '/profile':
-               $scope.profileDisabled = false;
+               
                break;
            case '/registration/statistic':
            case '/login/statistic':
-               $scope.profileDisabled = false;
+               
                break;
            default:
-               $scope.profileDisabled = true;
+     
                break;
        };
+
+        switch (location.hash) {
+           case '#/usage':
+               $scope.usageDisabled = true;
+               break;
+           case '#/download':
+               $scope.downloadDisabled = true;
+               break;
+           case '#/about':
+               $scope.aboutDisabled = true;
+               break;
+       };
+
+
 
        $scope.menuType = function() {
            $scope.webToolbar = (window.screen.availWidth < 600 || window.innerWidth < 600) ? false : true;
@@ -172,10 +185,13 @@
    });
 
    app.controller('indexCtl', function($scope) {
-       console.log("index ctrl..");
 
-       $scope.showGraph = function() {
-           console.log("skizb..");
+   });
+
+   app.controller('loginedCtl', function($scope,isLogined) {
+    console.log('fffffff');
+        isLogined.logined=true;
+        $scope.showGraph = function() {
            var lineChartData = {
                labels: [],
                datasets: [{
@@ -197,10 +213,6 @@
                maintainAspectRatio: true,
                responsive: true
            });
-           console.log("verj..", x);
 
        }
-
-
-
    });

@@ -1,0 +1,27 @@
+ <div align="center" layout="column" ng-cloak="" id="singUpBg" class="inputdemoErrorsAdvanced styledBg  ">
+
+         <a href="/"><img src="/view/res/icon.png"  class="signInLogoSize"></a>
+
+         <md-content layout-padding="" style="background: transparent;margin-top: 0% ">
+            <div ng-show="signinError"style="top: 0;left: 30%;color: red;font-size: medium;" class="hint">Invalid Email or Password </div>
+            <form name="userForm" method="post" action="/login/statistic">
+               <div    ng-repeat="fields in signInArray" layout-gt-sm="row">
+                  <md-input-container   class="md-block lightInput" flex-gt-sm="">
+                     <label style="text-align: left">{{fields.place}}</label>
+                     <input   md-maxlength="{{fields.max}}" type="{{fields.type}}" required minlength="{{fields.min}}" name="{{fields.name}}"  ng-model="user.name">
+                     <div style="margin-left:2%" class="hint">{{fields.text}}</div>
+                     <div  ng-messages="userForm.email.$error"   role="alert">
+                        <div style="float:left; margin-bottom:3%" ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
+                           {{fields.rederror}}
+                        </div>
+                     </div>
+                  </md-input-container>
+               </div>
+               <label id="rememberStyle"><input  type="checkbox" name="remember"  >Remember me</label>
+               <label>  <a href="/login/#/forgotpassword" id="forgot" style="margin:0%">Forgot password? </a></label>
+               <button tyle="margin-top:0%;" type="submit" class ="signInButtonSize blueButton ">Sign In</button> 
+            </form>
+         </md-content>
+         <div align="center"><label> <a href="/login/#/signup" style="color: #5FA5FF;">Create an account </a></label></div>
+      </div>
+      </div>

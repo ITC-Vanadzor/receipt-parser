@@ -11,24 +11,11 @@ var jsonwebtoken = require('jsonwebtoken');
 module.exports.get = function(req, res) {
       res.render('index.html');
 };
-module.exports.getUsage = function(req, res) {
-      res.render('src/usage.html');
+
+module.exports.getLogin = function(req, res) {
+      res.render('src/login.html');
 };
-module.exports.getSignIn = function(req, res) {
-      res.render('src/signin.html');
-};
-module.exports.getSignUp = function(req, res) {
-      res.render('src/signup.html');
-};
-module.exports.getForgotPassword = function(req, res) {
-      res.render('src/forgotpassword.html');
-};
-module.exports.getDownload = function(req, res) {
-      res.render('src/download.html');
-};
-module.exports.getAbout = function(req, res) {
-      res.render('src/about.html');
-};
+
 module.exports.getProfile = function(req, res) {
       res.render('src/profile.html');
 };
@@ -41,7 +28,7 @@ module.exports.signIn = function(req, res,next) {
             res.render('src/statistic.html', {
                 token: generateToken(req.body.email)});
         } else {
-           res.end('cant\'t  logined');
+           res.redirect('/login/#/loginError');
         }
     })(req, res, next);
 };
@@ -50,7 +37,7 @@ module.exports.signUp = function(req, res) {
     var data = req.body;
     User.create(data, function(err) {
         if (err) {
-            res.end('can\'t create user')
+            res.redirect('/login/#/registerError');
         } else {
             res.render('src/statistic.html', {
                 token: generateToken(req.body.email)});

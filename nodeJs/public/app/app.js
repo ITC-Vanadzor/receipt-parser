@@ -1,48 +1,65 @@
 var app = angular.module("app", ['ngRoute', 'ngMaterial', 'ngMessages', 'material.svgAssetsCache']);
 
+app.factory('isLogined', function() {
+  return {
+      logined : false
+  };
+});
+
 app.config(['$routeProvider', function($routeProvider) {
 
     $routeProvider.
 
-    when('/resetpassword', {
-        templateUrl: '/view/src/htm/resetPassword.htm',
-        controller: 'signInController'
-    }).
-
-    when('/signup', {
-        templateUrl: '/view/src/htm/signUp.htm',
-        controller: 'signInController'
-    }).
-    when('/forgotpassword', {
-        templateUrl: '/view/src/htm/forgotPassword.htm',
-        controller: 'signInController'
-    }).
-    when('/signin', {
-
-        templateUrl: '/view/src/htm/signIn.htm',
-        controller: 'signInController'
-
-    }).
     when('/usage', {
 
-        templateUrl: '/view/src/usage.html',
+        templateUrl: '/view/src/htm/usage.htm',
         controller: 'usageController'
 
     }).
-    when('/profile', {
+    when('/download', {
 
-        templateUrl: '/view/src/profile.html',
+        templateUrl: '/view/src/htm/download.htm',
         controller: 'indexCtl'
 
     }).
-    when('/statistic', {
+    when('/about', {
 
-        templateUrl: '/view/src/statistic.html',
+        templateUrl: '/view/src/htm/about.htm',
         controller: 'indexCtl'
+
+    }).
+    when('/signin', {
+
+        templateUrl: '/view/src/htm/signin.htm',
+        controller: 'signInController'
+
+    }).
+    when('/signup', {
+
+        templateUrl: '/view/src/htm/signup.htm',
+        controller: 'signInController'
+
+    }).
+    when('/forgotpassword', {
+
+        templateUrl: '/view/src/htm/forgotpassword.htm',
+        controller: 'signInController'
+
+    }).
+    when('/loginError', {
+
+        templateUrl: '/view/src/htm/signin.htm',
+        controller: 'signInController'
+
+    }).
+    when('/registerError', {
+
+        templateUrl: '/view/src/htm/signup.htm',
+        controller: 'signInController'
 
     }).
     otherwise({
-        templateUrl: '/view/src/home.html',
+        templateUrl: '/view/src/htm/home.htm',
         controller: 'indexCtl'
     });
 

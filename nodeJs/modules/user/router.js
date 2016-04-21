@@ -7,12 +7,7 @@ var router = express.Router();
 module.exports = function() {
   router.get('/', controller.get);
 
-  router.get('/usage/', controller.getUsage);
-  router.get('/signin/', controller.getSignIn);
-  router.get('/signup/', controller.getSignUp);
-  router.get('/forgotpassword/', controller.getForgotPassword);
-  router.get('/about/', controller.getAbout);
-  router.get('/download/', controller.getDownload);
+  router.get('/login/', controller.getLogin);
   router.get('/profile/', controller.getProfile);
 
   router.post('/registration/statistic/',  controller.signUp);  

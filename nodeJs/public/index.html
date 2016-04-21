@@ -18,15 +18,11 @@
       <script src="/libs/md/js/svg-assets-cache.js"></script>
       <script src="/libs/md/js/angular-material.js"></script>
       <script src="/libs/jquery.min.js"></script>
-      <script src="/view/js/script.js" type="text/javascript"></script>
       <script src="/app/app.js"></script>
       <script src="/controller/controller.js"></script>
       <title>HDM Home Page</title>
    </head>
    <body  class="webSiteBackground" ng-app="app" ng-controller="indexCtl">
-      <div ng-include="'view/src/htm/menubar.htm'"></div>
-      <div id="bigLogoBg">
-         <img src="/view/res/icon.png" id="bigLogoImg">
-      </div>
+      <ng-view></ng-view>
    </body>
 </html>
