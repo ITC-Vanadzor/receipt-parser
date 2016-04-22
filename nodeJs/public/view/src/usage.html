@@ -2,121 +2,137 @@
 <html>
    <head>
       <title>Usage Of HDM</title>
-      <link rel="stylesheet" href="../css/style.css">
+      
      
+      <link rel="stylesheet" href="../css/style.css">
       <script src="../../libs/angular.js"></script>
-      <script src="../../app/app.js"></script>
-      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0rc1/angular-route.min.js"></script>	
+      <script src="../../../app/app.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0rc1/angular-route.min.js"></script> 
       <script src="../../controller/controller.js"></script>
-      <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-      <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-
-      <style type="text/css">
-body { /* just for this demo. */
-    padding: 30px;
-}
-.btn { /* just for this demo. */
-    margin-top: 5px;
-}
-.btn-arrow-right,
-.btn-arrow-left {
-    position: relative;
-    padding-left: 18px;
-    padding-right: 18px;
-}
-.btn-arrow-right {
-    padding-left: 36px;
-}
-.btn-arrow-left {
-    padding-right: 36px;
-}
-.btn-arrow-right:before,
-.btn-arrow-right:after,
-.btn-arrow-left:before,
-.btn-arrow-left:after { /* make two squares (before and after), looking similar to the button */
-    content:"";
-    position: absolute;
-    top: 5px; /* move it down because of rounded corners */
-    width: 22px; /* same as height */
-    height: 22px; /* button_outer_height / sqrt(2) */
-    background: inherit; /* use parent background */
-    border: none; /* use parent border */
-    border-left-color: none; /* hide left border */
-    border-bottom-color: none; /* hide bottom border */
-    border-radius: 0px 4px 0px 0px; /* round arrow corner, the shorthand property doesn't accept "inherit" so it is set to 4px */
-    -webkit-border-radius: 0px 4px 0px 0px;
-    -moz-border-radius: 0px 4px 0px 0px;
-}
-.btn-arrow-right:before,
-.btn-arrow-right:after {
-    transform: rotate(45deg); /* rotate right arrow squares 45 deg to point right */
-    -webkit-transform: rotate(45deg);
-    -moz-transform: rotate(45deg);
-    -o-transform: rotate(45deg);
-    -ms-transform: rotate(45deg);
-}
-.btn-arrow-left:before,
-.btn-arrow-left:after {
-    transform: rotate(225deg); /* rotate left arrow squares 225 deg to point left */
-    -webkit-transform: rotate(225deg);
-    -moz-transform: rotate(225deg);
-    -o-transform: rotate(225deg);
-    -ms-transform: rotate(225deg);
-}
-.btn-arrow-right:before,
-.btn-arrow-left:before { /* align the "before" square to the left */
-    left: -11px;
-}
-.btn-arrow-right:after,
-.btn-arrow-left:after { /* align the "after" square to the right */
-    right: -11px;
-}
-.btn-arrow-right:after,
-.btn-arrow-left:before { /* bring arrow pointers to front */
-    z-index: 1;
-}
-.btn-arrow-right:before,
-.btn-arrow-left:after { /* hide arrow tails background */
-    background-color: #bfbfbf;
+      <link rel="stylesheet" type="text/css" href="https://cdn.gitcdn.link/cdn/angular/bower-material/v1.1.0-rc2/angular-material.css">
+      <!-- <link rel="stylesheet" type="text/css" href="https://material.angularjs.org/1.1.0-rc2/docs.css"> -->
+      <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js"></script>
+      <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.min.js"></script>
+      <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js"></script>
+      <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js"></script>
+      <script type="text/javascript" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/t-114/svg-assets-cache.js"></script>
+      <script type="text/javascript" src="https://cdn.gitcdn.link/cdn/angular/bower-material/v1.1.0-rc2/angular-material.js"></script>
+      <style>
+*,
+*:after,
+*:before {
+  box-sizing: border-box;
 }
 
+.steps-container {
+  overflow: hidden;
+  margin: 0px;
+  padding: 0px;
+  white-space: nowrap;
+    width: 100%;
+    border:none;
+  counter-reset: steps;
+}
+.steps {
+  width  : 32%;
+  position: relative;
+  display: inline-block;
+  left: -28px; /* -2px default + 26px offset to hide skewed area on the left side of first element*/
+  height: 50px;
+  line-height: 50px;
+  margin-left: 0px;
+  margin-right: 0px;
+  border:none;
+  counter-increment: steps;
+  cursor: pointer;
+  transition: background 1s;
+  min-height: 30px;
+}
+
+.steps:after,
+.steps:before {
+  position: absolute;
+  content: '';
+  left: 0px;
+  height: 50%;
+  width: 100%;
+ 
+  background: #999999;
+}
+
+.steps:before {
+  transform: skew(45deg);
+  top: 0px;
+  
+  transform-origin: top left;
+}
+
+.steps:after {
+  transform: skew(-45deg);
+  bottom: 0px;
+
+  transform-origin: bottom left;
+}
+
+.steps span{
+  z-index: 1300;
+  display: block;
+  font-size: 25px;
+  padding-left: 40px;
+  padding-bottom: 20px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+  height: 75%;
+  vertical-align: middle;
+  border:none;
+  text-align: center;
+}
+
+.steps span:before{
+  z-index: 11;
+/*  content: counter(steps) ". ";*/
+}
+.steps.active span{
+  font-weight: bold;  
+}
+.steps.active:before,
+.steps.active:after {
+  z-index: 11;
+  background: #0094F7;
+}
+
+/* Just for demo */
+html,
+
+input[type="range"]{
+  vertical-align: middle;
+}
+label{
+  font-variant: small-caps;
+  font-weight: bold;
+  font-size: 1.25em;
+  letter-spacing: 1.1px;
+}
       </style>
+  
+    
 </head>
 
-   <body  class="webSiteBackground">
-
-
-
-
-
+   <body >
 
      <!--Usage div -->
       <div  ng-app="app" ng-controller="usageController" class="styledBg  " id="sizeOfUsageBg" >
-             
-
-   
-             <div>
-              <span id="Progress" ng-repeat ="prog in progressArray" >
-                    <button   ng-style="{{prog.buttonStep}}" ng-click="showDiv(prog.showDiv)"  type="button" class="btn btn-warning btn-arrow-right">{{prog.Step}} </button>
-              </span>
-                  
-            </div>  
-            <div class="container" style="  width: 100%;margin-top: 8%" >
-                <div class="progress" style="width: 100%; height: 8px;" >
-                    <div id="  progressBoot"class="progress-bar" id="progBlue" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" ng-style="progWidth">
-                    </div>
-
-                </div>
-            </div>
-          
-
-
-
-
-
-
-            <div ng-repeat ="show in showArray" >
+<script class="cssdeck" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+                 
+                <div class='steps-container' >
+                   <label ng-repeat ="prog in progressArray">
+                          <div  ng-click="showDiv(prog.showDiv)"  ng-class="{true: 'active steps', false: 'steps'}[isActive[prog.showDiv]]">
+                            <span style=" position:absolute;color:white;" >Step {{prog.Step}}</span>
+                          </div>
+                         </label>
+           </div>
+          <div ng-repeat ="show in showArray" >
                 <div ng-show="{{show.div}}">
                     <img class="usageImageSize"  ng-src = "{{show.src}}" alt="step"/>
                     <p class="usageText"  >{{show.text}}</p>
