@@ -28,17 +28,15 @@
 	        div: "div[2]",
 	        text: "It is that text, which will tell us about the  third step to do for using our fascinating application:))))",
 	        src: "../res/3step.png"
-	    }, ];
+	    }];
 
 	    // function, which dynamicly  show steps	
 	    $scope.showDiv = function(num) {
 	    	$scope.isActive=[false,false,false]
 	    	$scope.isActive[num]=true;
 	        
-	      
 	        var blueButton = {
 	        	 "background-color": "#0094F7",
-	            // "background": "linear-gradient(to top, #0094F7, #007acc)"
 	        };
 	       
 	        var hideDiv = false;
@@ -51,9 +49,6 @@
 	        $scope.buttonStep[num] = {
 	            "background": "#999999"
 	        };
-	       
-	     
-
 	    }
 
 	    $scope.showDiv(0);
