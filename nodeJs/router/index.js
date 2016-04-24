@@ -18,7 +18,7 @@ var jwtConf = {
 module.exports = function (app) {
 	app.use(
 		jwt(jwtConf)
-		.unless({path:['/user/registration']})
+		.unless({path:['/login']})
 		);
 	app.use('/', router());
 }

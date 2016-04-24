@@ -59,14 +59,16 @@
        $scope.showDiv(0);
    });
 
-   app.controller('signInController', function($scope) {
-          console.log(location.hash);
-       if(location.hash=="#/loginError" || location.hash=="#/registerError"){
+   app.controller('signInController', function($scope) {     
+      
+      if(location.hash=="#/loginError" || location.hash=="#/registerError"){
             $scope.signinError=true;
           }
           else {
             $scope.signinError=false;
           }
+
+       localStorage.removeItem("userName");
 
        $scope.showHints = true;
        //array for create acclount inputs
@@ -107,6 +109,12 @@
 
        $scope.signInArray = [$scope.createArray[1], $scope.createArray[2], ];
 
+
+   });
+
+
+
+   app.controller('profileCtl', function($scope) {
        //array for input profile datas
        $scope.profileInputArray = [{
            name: "password",
@@ -126,9 +134,11 @@
        }, {
            name: "Birthday"
        }];
-   });
+});
 
-   app.controller('menuBarCtl', function($scope,isLogined) {
+
+
+   app.controller('menuBarCtl', function($scope) {
        $scope.homeUrl = "/";
        $scope.aboutUrl = "/#/about";
        $scope.downloadUrl = "/#/download";
@@ -136,23 +146,26 @@
        $scope.signInUrl = "/login/#/signin";
        $scope.signUpUrl = "/login/#/signup";
        $scope.profileUrl = "/profile";
-       $scope.exitUrl = "/";
+       $scope.exitUrl = "/login/#/signin";
 
        $scope.aboutDisabled = false;
        $scope.usageDisabled = false;
        $scope.downloadDisabled = false;
-  
-       $scope.profileDisabled=!isLogined.logined;
        
+       var userName=localStorage.getItem("userName");
+       if(userName!=null){
+          $scope.profileDisabled=false;
+       }
+       else{
+          $scope.profileDisabled=true;
+       }
 
        $scope.webToolbar = true;
        switch (location.pathname) {
-           case '/profile':
-               
+           case '/profile':               
                break;
            case '/registration/statistic':
-           case '/login/statistic':
-               
+           case '/login/statistic':               
                break;
            default:
      
@@ -185,12 +198,10 @@
    });
 
    app.controller('indexCtl', function($scope) {
-
    });
 
-   app.controller('loginedCtl', function($scope,isLogined) {
-    console.log('fffffff');
-        isLogined.logined=true;
+   app.controller('loginedCtl', function($scope) {
+        localStorage.setItem("userName","JAN");
         $scope.showGraph = function() {
            var lineChartData = {
                labels: [],

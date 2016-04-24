@@ -1,10 +1,5 @@
 var app = angular.module("app", ['ngRoute', 'ngMaterial', 'ngMessages', 'material.svgAssetsCache']);
 
-app.factory('isLogined', function() {
-  return {
-      logined : false
-  };
-});
 
 app.config(['$routeProvider', function($routeProvider) {
 

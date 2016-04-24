@@ -1,4 +1,5 @@
 var allows = {};
+var tokens={};
 
 function Acl() {}
 
@@ -21,5 +22,12 @@ Acl.prototype.allow = function(name) {
         throw new Error('you haven\'t such canditions');
     }
 };
+
+Acl.prototype.setToken=function(email,token){
+    tokens[email]=token;
+}
+Acl.prototype.getToken=function(email){
+    return tokens[email];
+}
 
 module.exports = new Acl();
