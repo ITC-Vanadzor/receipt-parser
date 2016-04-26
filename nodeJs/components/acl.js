@@ -1,6 +1,5 @@
 var allows = {};
 var tokens={};
->>>>>>> RR-XX
 
 function Acl() {}
 
