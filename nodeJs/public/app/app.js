@@ -1,5 +1,4 @@
-var app = angular.module("app", ['ngRoute', 'ngMaterial', 'ngMessages', 'material.svgAssetsCache']);
-
+var app = angular.module("app", ['ngRoute', 'ngMaterial', 'ngMessages', 'material.svgAssetsCache','ngTable']);
 
 app.config(['$routeProvider', function($routeProvider) {
 

@@ -1,3 +1,44 @@
+
+.myTable{
+    display: table;
+    border-collapse: separate;
+    border-spacing: 13px;
+    text-align: center;
+    background-color: rgba(255, 230, 255,1);
+    width: 100%;
+}
+.tableDiv{
+    min-width: 300px;
+	width: 50%;
+	margin: 15px auto;
+	color: #0094F7;
+
+}
+.filtreDates{
+	font-size: 0;
+	margin-left: 8%;
+}
+
+
+.filterDiv{
+	width: 50%;
+	min-width: 300px;
+	margin: auto;
+
+}
+
+.hellStyle{
+	position: fixed; 
+	margin-top:0; 
+	z-index: 110; 
+	top: 0; 
+	left: 0; 
+	width: 100%; 
+	height: 100%; 
+	background-color: black; 
+	opacity: .90;
+}
+
 .toolbarBg{
 	background-color: #E8E8E8;
 	color: #737373;
@@ -227,8 +268,9 @@ display: block;
 }
 .graphSize{
 	width: 50%;
+	min-width: 300px;
 	padding: 15px;
-	margin: 7% 20%;
+	margin: 7% auto;
 }
 /*______________________ANI_______________________*/
 /* statistic  page*/
@@ -244,14 +286,15 @@ display: block;
 /* window, which will show edit or add row*/
 #editWindow{
 	position: absolute;
-	margin:-40% 20% 0%;
-	width:60%;
+	width:50%;
 	padding:3%;
+	margin: auto 20%;
+	z-index: 55555;
 
 	
 }
 #editWindow input{
-	width:55%;
+	width:100%;
 	padding:2%;
 	font-size:90%;
 	margin-right:4%;
@@ -261,18 +304,11 @@ display: block;
 #editWindow  div, #editWindow img{
 	margin: 2% 0% 0%;
 	background:none;
-	width: 50%;
+	width: 100%;
 	float:right;
 	padding:0%;
 }
-#editWindow button{
-	width:29%;
-	margin:8% 0% 2% ;
-	padding:1%;
-	float:left;
-	min-width:60px;
 
-}
 #editWindow label{
 	min-width:50px;
 }

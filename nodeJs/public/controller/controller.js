@@ -200,7 +200,78 @@
    app.controller('indexCtl', function($scope) {
    });
 
-   app.controller('loginedCtl', function($scope) {
+   app.controller('loginedCtl', function($scope,ngTableParams) {
+       $scope.hellDiv=false;
+       $scope.editWindow=function(user){
+        var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        if (scrollTop > 0) {
+            scrollTop = (window.screen.height / 2)-300  + (scrollTop);
+        } else {
+            scrollTop = (window.screen.height / 2)-300 ;
+        }
+        document.getElementById("editWindow").style.top = (scrollTop) + "px";
+        document.getElementById("editWindow").style.display = "block";
+
+        $scope.marketM = user.market;
+        $scope.dateM = user.date;
+        $scope.timeM = user.time;
+        $scope.moneyM = user.price;
+        $scope.noteM = user.item;
+
+        $scope.hellDiv=true;
+       }
+       $scope.hideDiv=function(){
+        $scope.hellDiv=false;
+       }
+
+
+
+       $scope.myDate=new Date(2015,07,05);
+       $scope.minDate=new Date(2015,07,05);
+       $scope.maxDate=new Date(2016,07,05);
+
+         var data = [
+            {market: "Sas", date: "12.12.12",time:"20:30",price:3500,item:"---"},
+            {market: "Star", date: "12.12.12",time:"20:30",price:3500,item:"---"},
+            {market: "Smile", date: "12.12.12",time:"20:30",price:3500,item:"---"},
+            {market: "Book", date: "12.12.12",time:"20:30",price:3500,item:"---"},
+            {market: "KFC", date: "12.12.12",time:"20:30",price:3500,item:"---"},
+            {market: "Star", date: "12.12.12",time:"20:30",price:3500,item:"---"},
+            {market: "Smile", date: "12.12.12",time:"20:30",price:3500,item:"---"},
+            {market: "Book", date: "12.12.12",time:"20:30",price:3500,item:"---"},
+            {market: "KFC", date: "12.12.12",time:"20:30",price:3500,item:"---"},
+            {market: "Star", date: "12.12.12",time:"20:30",price:3500,item:"---"},
+            {market: "Smile", date: "12.12.12",time:"20:30",price:3500,item:"---"},
+            {market: "Book", date: "12.12.12",time:"20:30",price:3500,item:"---"},
+            {market: "KFC", date: "12.12.12",time:"20:30",price:3500,item:"---"},
+            {market: "Star", date: "12.12.12",time:"20:30",price:3500,item:"---"},
+            {market: "Smile", date: "12.12.12",time:"20:30",price:3500,item:"---"},
+            {market: "Book", date: "12.12.12",time:"20:30",price:3500,item:"---"},
+            {market: "KFC", date: "12.12.12",time:"20:30",price:3500,item:"---"}];
+
+            $scope.tableParams = new ngTableParams({
+                page: 1,            // show first page
+                count: 5,           // count per page
+                sorting: {
+                    name: 'asc'     // initial sorting
+                }
+            }, {
+                total: data.length, // length of data
+                getData: function($defer, params) {
+                    $defer.resolve(data.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+                }
+            });
+
+            $scope.moreVal=5;
+            $scope.more=function(){
+              $scope.moreVal+=5;
+              return $scope.moreVal+=5;
+            }
+
+
+
+
+
         localStorage.setItem("userName","JAN");
         $scope.showGraph = function() {
            var lineChartData = {
@@ -227,3 +298,6 @@
 
        }
    });
+
+
+
