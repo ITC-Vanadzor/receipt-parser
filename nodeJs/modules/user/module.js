@@ -37,7 +37,7 @@ User.prototype.signin = function(data, callback) {
         if (!err) {
             var password = transformPasword(data.password);
             password = sha256(password);
-            var query = 'SElECT * from testbase.accounts where email = "' + data.email + '" and password="' + password + '"';
+            var query = 'SElECT * from hdm.accounts where email = "' + data.email + '" and password="' + password + '"';
             db.query(query, function(err, rows) {
                 var user = rows && rows.length ? rows[0] : null;
 

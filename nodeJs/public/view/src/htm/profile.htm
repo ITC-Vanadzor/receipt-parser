@@ -1,16 +1,12 @@
-   <div style="margin-left: 0%;"  layout="column" ng-cloak=""   class="profileDivSize1  styledBg">
-              
-                 <md-content layout-padding="" style="background: transparent;">
-                    <form name="userForm" method="post" action="">
-                        <p class="headStyle">Profile</p>
-                        
-                        <md-input-container    style=" margin:0%";    ng-repeat="fields in profileArray" layout-gt-sm="row" class="md-block profileInputSize lightInput" flex-gt-sm="">
-                                 <label style="text-align: left">{{fields.name}}</label>                         
-                                      <input type="{{fields.name}}" name="name" class="profileInputSize" >
-                        </md-input-container>
-                                      
-                        <button class="blueButton profileButtonSize" >Update profile</button>
-            
-                    </form>
-                  </md-content>
-            </div>
+<div style="margin-left: 0%;"  layout="column" ng-cloak=""   class="profileDivSize1  styledBg">
+   <md-content layout-padding="" style="background: transparent;">
+      <form name="userForm" method="post" action="">
+         <p class="headStyle">Profile</p>
+         <md-input-container    style="margin:0%";    ng-repeat="fields in profileArray" layout-gt-sm="row" class="md-block profileInputSize lightInput" flex-gt-sm="">
+            <label style="text-align: left">{{fields.name}}</label>                         
+            <input type="{{fields.name}}" name="name" class="profileInputSize" >
+         </md-input-container>
+         <button class="blueButton profileButtonSize" >Update profile</button>
+      </form>
+   </md-content>
+</div>

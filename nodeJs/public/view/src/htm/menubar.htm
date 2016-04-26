@@ -1,0 +1,80 @@
+<div ng-app="app" ng-controller="menuBarCtl" ng-init="init()">
+   <div ng-show="webToolbar">
+      <md-toolbar class="toolbarBg">
+         <div class="md-toolbar-tools toolbarBg">
+            <a ng-href="{{homeUrl}}" class="icon" ><img src="/view/res/icon.png"></a>
+            <md-button ng-disabled="aboutDisabled" ng-href="{{aboutUrl}}"> About Us </md-button>
+            <md-button ng-disabled="usageDisabled" ng-href="{{usageUrl}}"> How to Use </md-button>
+            <md-button ng-disabled="downloadDisabled" ng-href="{{downloadUrl}}"> Download </md-button>
+            <span flex=""></span>
+            <div ng-show="profileDisabled">
+               <md-button  class="md-raised" id="bButton" ng-href="{{signUpUrl}}">Sign Up</md-button>
+               <md-button class="md-raised" id="gButton"  ng-href="{{signInUrl}}">Sign In</md-button>
+            </div>
+            <md-menu-bar  ng-show="!profileDisabled">
+               <md-menu md-position-mode="target-right target">
+                  <md-list>
+                     <md-list-item  ><img class="md-avatar" ng-click="$mdOpenMenu()" ng-src="/view/res/profile.png"></md-list-item>
+                  </md-list>
+                  <md-menu-content>
+                     <md-menu-item>
+                        <md-button ng-href="{{profileUrl}}">Profile Settings </md-button>
+                     </md-menu-item >
+                     <md-menu-item>
+                        <md-button ng-href="{{exitUrl}}">Log Out </md-button>
+                     </md-menu-item>
+                  </md-menu-content>
+               </md-menu>
+            </md-menu-bar>
+         </div>
+      </md-toolbar>
+   </div>
+   <div ng-show="!webToolbar">
+      <md-fab-toolbar md-direction="{{'right'}}">
+         <md-fab-trigger class="align-with-text">
+            <md-button aria-label="menu" class="md-fab md-primary">
+               <md-icon md-svg-src="img/icons/menu.svg"></md-icon>
+            </md-button>
+         </md-fab-trigger>
+         <md-toolbar>
+            <md-fab-actions class="md-toolbar-tools">
+               <!--  Home icon -->
+               <md-button  ng-href="{{homeUrl}}" aria-label="comment" class="md-icon-button">
+                  <md-icon  md-svg-src="/view/res/icon.svg"></md-icon>
+               </md-button>
+               <!--  Profile icon -->
+               <md-button ng-show="!profileDisabled" ng-href="{{profileUrl}}" aria-label="comment" class="md-icon-button">
+                  <md-icon md-svg-src="/view/res/ic_account_circle_black_24px.svg"></md-icon>
+               </md-button>
+               <!-- Download icon -->
+               <md-button ng-show="!downloadDisabled" ng-href="{{downloadUrl}}" aria-label="comment" class="md-icon-button">
+                  <md-icon md-svg-src="/view/res/ic_file_download_black_24px.svg"></md-icon>
+               </md-button>
+               <!-- Usage icon -->
+               <md-button ng-show="!usageDisabled" ng-href="{{usageUrl}}" aria-label="comment" class="md-icon-button">
+                  <md-icon md-svg-src="/view/res/ic_perm_device_information_black_24px.svg"></md-icon>
+               </md-button>
+               <!-- About us icon -->
+               <md-button ng-show="!aboutDisabled" ng-href="{{aboutUrl}}" aria-label="comment" class="md-icon-button">
+                  <md-icon md-svg-src="/view/res/ic_people_black_24px.svg"></md-icon>
+               </md-button>
+               <!-- Exit icon -->
+               <md-button ng-show="!profileDisabled" ng-href="{{exitUrl}}" aria-label="comment" class="md-icon-button">
+                  <md-icon md-svg-src="/view/res/ic_exit_to_app_black_24px.svg"></md-icon>
+               </md-button>
+               <!-- Sign IN -->
+               <md-button ng-show="profileDisabled" ng-href="{{signInUrl}}" aria-label="comment" class="md-icon-button">
+                  <md-icon md-svg-src="/view/res/ic_assignment_ind_black_24px.svg"></md-icon>
+               </md-button>
+               <!-- Sign UP -->
+               <md-button ng-show="profileDisabled" ng-href="{{signUpUrl}}" aria-label="comment" class="md-icon-button">
+                  <md-icon md-svg-src="/view/res/ic_create_black_24px.svg"></md-icon>
+               </md-button>
+            </md-fab-actions>
+         </md-toolbar>
+      </md-fab-toolbar>
+   </div>
+</div>
+</md-content>
+</div>
+</div>

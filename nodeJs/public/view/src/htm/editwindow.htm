@@ -1,0 +1,32 @@
+<div  ng-show="hellDiv" ng֊click="hideDiv()" class="hellStyle"></div>
+<div  ng-show="hellDiv" id="editWindow" class="styledBg">
+<p class="headStyle">Edit item</p>
+<!-- <img src="../res/3step.png" height="200" alt="pic" > -->
+<div id ="editRowInputs">
+
+         <md-input-container class="md-block">
+        <input ng-model='marketM' type="text" id="Market"   placeholder="Market" name="market">
+         </md-input-container>
+         <md-input-container>
+      <input ng-model='moneyM' type="text"id="Price"    placeholder="Price" name="price">
+  </md-input-container>
+
+
+<md-input-container>
+      <input ng-model='dateM' type="text" id="Date"    placeholder="Date" name="date" min="2000-01-02">
+  </md-input-container>
+<md-input-container >
+      <input ng-model='timeM' type="text"id="Time"    placeholder="Time" name="time">
+  </md-input-container>
+
+<md-input-container class="md-block">
+      <input ng-model='noteM' type="text"id="Item"     placeholder="Item" name="item">
+  </md-input-container>
+
+</div>
+   <div style="    width: 100%;
+    margin: auto;
+    text-align: center;"><md-button  class="md-raised">save</md-button>
+      <md-button  class="md-raised" ng-click="hideDiv()">cancel</md-button>
+   </div>
+</div>
