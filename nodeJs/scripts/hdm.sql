@@ -1,72 +1,32 @@
 Create database HDM;
 Use HDM;
-CREATE TABLE user 
-  ( 
-     id       INT NOT NULL auto_increment, 
-     username VARCHAR(20) NOT NULL, 
-     email    VARCHAR(35) NOT NULL, 
-     password VARCHAR(256) NOT NULL, 
-     PRIMARY KEY(id), 
-     KEY indexemail (email), 
-     UNIQUE KEY (email) 
-  );
+Create table user (
+	id int not null auto_increment, 
+	username varchar(20) not null, 
+	email varchar(35) not null,
+	password varchar(256) not null, 
+	primary key(id));
 
-CREATE TABLE field 
-  ( 
-     field_id  INT NOT NULL auto_increment, 
-     opt_field VARCHAR(55) NOT NULL, 
-     PRIMARY KEY(field_id) 
-  );
+Create table field (
+	field_id int not null auto_increment,
+	opt_field varchar(55) not null,
+	primary key(field_id));
 
-CREATE TABLE account 
-  ( 
-     opt_id  INT NOT NULL auto_increment, 
-     u_id    INT NOT NULL, 
-     f_id    INT NOT NULL, 
-     f_value VARCHAR(255) NOT NULL, 
-     PRIMARY KEY(opt_id), 
-     FOREIGN KEY(u_id) REFERENCES user(id), 
-     FOREIGN KEY(f_id) REFERENCES field(field_id), 
-     UNIQUE KEY (u_id, f_id) 
-  );
+Create table account (
+	opt_id int not null auto_increment,
+	opt_value varchar(255) not null, 
+	u_id int not null, 
+	f_id int not null, 
+	primary key(opt_id), 
+	foreign key(u_id) references user(id), 
+	foreign key(f_id) references field(field_id));
 
-CREATE TABLE receipt 
-  ( 
-     id     INT NOT NULL auto_increment, 
-     time   DATETIME NOT NULL, 
-     market VARCHAR(50) NOT NULL, 
-     sum    INT NOT NULL, 
-     date   DATE NOT NULL, 
-     img    VARCHAR(255), 
-     u_id   INT NOT NULL, 
-     PRIMARY KEY(id), 
-     FOREIGN KEY(u_id) REFERENCES user(id), 
-     KEY indextime (time, market), 
-     UNIQUE KEY (img) 
-  ); 
-
-INSERT INTO field 
-            (field_id, 
-             opt_field) 
-VALUES      (1, 
-             'surname'), 
-            (2, 
-             'birthday'), 
-            (3, 
-             'image'); 
-
-CREATE VIEW account_extend AS 
-            ( 
-                     SELECT   USER.id                             AS id, 
-                              USER.username                       AS NAME, 
-                              USER.email                          AS email, 
-                              USER.password                       AS pass, 
-                              max(IF(`f_id` = 1, f_value, "..."))    surname, 
-                              max(IF(`f_id` = 2, f_value, "..."))    birthday, 
-                              max(IF(`f_id` = 3, f_value, "..."))    image 
-                     FROM     (account 
-                     JOIN     USER) 
-                     WHERE    ( 
-                                       account.u_id=USER.id) 
-                     GROUP BY id 
-            );
+Create table receipt (
+	time datetime not null, 
+	market varchar(50) not null, 
+	sum int not null, 
+	date date not null, 
+	comment text not null, 
+	u_id int not null, 
+	primary key(time), 
+	foreign key(u_id) references user(id));

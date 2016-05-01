@@ -268,10 +268,6 @@
               return $scope.moreVal+=5;
             }
 
-
-
-
-
         localStorage.setItem("userName","JAN");
         $scope.showGraph = function() {
            var lineChartData = {

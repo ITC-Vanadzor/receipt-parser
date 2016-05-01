@@ -11,5 +11,8 @@ module.exports = function() {
 
   router.post('/registration/statistic/',  controller.signUp);  
   router.post('/login/statistic/',controller.signIn);
+  router.post('/forgot/',controller.forgot);
+  router.post('/reset/:token',controller.reset);
+
   return router;
 };
