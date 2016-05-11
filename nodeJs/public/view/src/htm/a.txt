@@ -1,0 +1,4 @@
+etc/bash.bashrc
+.bashrc
+etc/bash.bashrc
+.bashrc
