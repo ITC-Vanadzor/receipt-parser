@@ -68,7 +68,6 @@ module.exports.getProfile = function(req, res) {
     res.render('src/profile.html');
 };
 
-
 module.exports.signIn = function(req, res, next) {
     var data = req.body;
     passport.authenticate('local', function(err, user, message) {
@@ -165,7 +164,6 @@ module.exports.reset = function(req, res) {
             return res.redirect('/login/#/forgotpassword');
         }
     });
-
 };
 
 
@@ -211,6 +209,6 @@ module.exports.setUserPassword=function(req, res) {
 }
 
 var generateToken = function(user) {
-    var token = jsonwebtoken.sign(user,'secret');
-    return token;
+	var token = jsonwebtoken.sign(new Date().getTime().toString(), user.toString());
+	return token;
 };
