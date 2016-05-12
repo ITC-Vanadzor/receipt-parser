@@ -4,7 +4,7 @@ var router = require('../modules/user/router');
 var jwt = require('express-jwt');
 
 var jwtConf = {
-	secret: 'secretsecretsecretsecret',
+	secret: 'private_key',
   	credentialsRequired: false,
 	getToken: function(req) {
 		if(req.headers && req.headers['x-auth']) {

@@ -1,3 +1,35 @@
+#about{
+    width: 90%;
+    margin: 5%;
+    margin-bottom:1%;
+    height: 400px;
+    z-index: -1;
+}
+.divAbout{
+    padding:1%;
+}
+.name{
+    font-size: 1.2em;
+    margin: 0% 5% 0% 5%;
+    color: #0094F7;
+}
+.text{
+    margin: 1% 5% 0% 5%;
+
+}
+
+#mainPurpose{
+    
+    position:absolute;
+    margin: -15% 9%;
+    font-size: 100%;
+}
+
+
+.profileButton{
+	float: right;
+}
+
 .myTable{
     display: table;
     border-collapse: separate;
@@ -188,7 +220,7 @@ a {
 /* size of login Bg*/
 .loginBgSize, #singUpBg{
 width: 30%;
-min-width: 500px;
+min-width: 300px;
 min-height: 350px;
 padding: 0% 1% 4% 1%;
 margin: 100px auto 2% auto;
@@ -271,34 +303,6 @@ display: block;
 	margin: 7% auto;
 }
 /*______________________ANI_______________________*/
-/*about page*/
-#about{
-    width: 90%;
-    margin: 5%;
-    margin-bottom:1%;
-    height: 400px;
-    z-index: -1;
-}
-.divAbout{
-    padding:1%;
-}
-.name{
-    font-size: 1.2em;
-    margin: 0% 5% 0% 5%;
-    color: #0094F7;
-}
-.text{
-    margin: 1% 5% 0% 5%;
-
-}
-
-#mainPurpose{
-    
-    position:absolute;
-    margin: -15% 9%;
-    font-size: 100%;
-}
-
 /* statistic  page*/
 /* it is for statistic pages styling dates*/
 /*button for saving added datas for new row*/
@@ -313,7 +317,9 @@ display: block;
 #editWindow{
 	position: absolute;
 	width:50%;
-	padding:3%;
+	max-height: 400px;
+	max-width: 600px;
+	padding:20px 10px;
 	margin: auto 20%;
 	z-index: 55555;
 }
@@ -323,6 +329,12 @@ display: block;
 	font-size:90%;
 	margin-right:4%;
 }
+
+#editWindow md-input-container{
+	margin-bottom: 0;
+	margin-top: 0;
+}
+
 
 /*all divs in edit window*/
 #editWindow  div, #editWindow img{

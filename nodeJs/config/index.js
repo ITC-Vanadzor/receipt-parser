@@ -7,6 +7,9 @@ var multer = require('multer');
 var path = require('path');
 var appDir = path.dirname(require.main.filename);
 
+
+
+
 module.exports = function(server) {
     // html renderer
     server.set('view engine', 'ejs');
@@ -21,9 +24,11 @@ module.exports = function(server) {
     // for parsing multipart/form-data
     var parser = multer();
     // for parsing application/json
-    server.use(bodyParser.json());
-    // for parsing application/x-www-form-urlencoded
+    server.use(bodyParser.json({
+        limit: '8mb'
+    }));
     server.use(bodyParser.urlencoded({
+        limit: '8mb',
         extended: true
     }));
     server.use(parser.array());

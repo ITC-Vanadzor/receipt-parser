@@ -25,51 +25,42 @@
       <title>Statistics</title>
    </head>
    <body  class="webSiteBackground" ng-app="app" ng-controller="loginedCtl">
-      <div >
-         
+      <div ng-show="statisticVisible">
          <div ng-include="'/view/src/htm/menubar.htm'"></div>
-
-         <div ng-include="'/view/src/htm/editwindow.htm'"></div>
-         
+         <div  ng-include="'/view/src/htm/editwindow.htm'"></div>
          <div class="styledBg graphSize">
             <canvas data-ng-init="showGraph()"  id='iGraph' > Boooo! </canvas>
          </div>
-
-
          <div class="styledBg filterDiv">
-             <md-datepicker class="filtreDates" ng-model="minDate" md-placeholder="Enter date" md-min-date="minDate" md-max-date="maxDate"></md-datepicker>
-             <md-datepicker class="filtreDates" ng-model="maxDate" md-placeholder="Enter date" md-min-date="minDate" md-max-date="maxDate"></md-datepicker>
-        </div>
-            
-         <div class="styledBg tableDiv">  
-         
-        <table ng-table="tableParams" template-pagination="custom/pager" class="table myTable">
-            <tr ng-repeat="user in $data" ng-click="editWindow(user)">
-                <td data-title="'Market'" >
-                    {{user.market}}
-                </td>
-                <td data-title="'Date'">
-                    {{user.date}}
-                </td>
-                <td data-title="'Time'">
-                    {{user.time}}
-                </td>
-               <td data-title="'Price'">
-                    {{user.price}}
-                </td>
-                <td data-title="'Item'">
-                    {{user.item}}
-                </td>
-            </tr>
-        </table>
-
-        <script type="text/ng-template" id="custom/pager">
-            <ul class="pager ng-cloak" style="height: 15px;">
-            <md-button style="margin:auto; width: 100%;font-size: 10px; padding: 0;" class="md-raised"  ng-click="params.count(more())"></md-button>
-            </ul>
-        </script>
-
-         </div>           
-            
+            <md-datepicker class="filtreDates" ng-model="minDate" md-placeholder="Enter date" md-min-date="minDate" md-max-date="maxDate"></md-datepicker>
+            <md-datepicker class="filtreDates" ng-model="maxDate" md-placeholder="Enter date" md-min-date="minDate" md-max-date="maxDate"></md-datepicker>
+         </div>
+         <div class="styledBg tableDiv">
+            <table ng-table="tableParams" template-pagination="custom/pager" class="table myTable">
+               <tr ng-repeat="user in $data" ng-click="editWindow(user)">
+                  <td data-title="'Market'" >
+                     {{user.market}}
+                  </td>
+                  <td data-title="'Date'">
+                     {{user.date}}
+                  </td>
+                  <td data-title="'Time'">
+                     {{user.time}}
+                  </td>
+                  <td data-title="'Price'">
+                     {{user.price}}
+                  </td>
+                  <td data-title="'Item'">
+                     {{user.item}}
+                  </td>
+               </tr>
+            </table>
+            <script type="text/ng-template" id="custom/pager">
+               <ul class="pager ng-cloak" style="height: 15px;">
+               <md-button style="margin:auto; width: 100%;font-size: 10px; padding: 0;" class="md-raised"  ng-click="params.count(more())"></md-button>
+               </ul>
+            </script>
+         </div>
+      </div>
    </body>
 </html>

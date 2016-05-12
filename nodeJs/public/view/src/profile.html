@@ -24,6 +24,7 @@
       <script src="/controller/controller.js"></script>
       <title>Profile</title>
    </head>
+   <body ng-controller="profileCtl"  ng-app="app" onload="previewFile()" class="webSiteBackground">
    <script>
       function previewFile(){
                 var preview = document.getElementById('pict'); //query -i @ntraci anun@ 'img' a
@@ -33,13 +34,12 @@
                   preview.src = reader.result;
                 }
                 if (file) {
-                reader.readAsDataURL(file); //tvyalner@ kkarda vorpes URL
+                reader.readAsDataURL(file); 
               } 
-              else {
-      
+              else {      
                 preview.src = "../res/profile.png";
               }
-            }                             
+            }                 
       
       
             function browsFile(){
@@ -47,12 +47,13 @@
             }
           
    </script>
-   <body ng-controller="profileCtl"  ng-app="app" onload="previewFile()" class="webSiteBackground">
+
+
       <div ng-include="'/view/src/htm/menubar.htm'"></div>
-      <div class="profileImg" onclick="browsFile()"><img width="100%" id="pict"  src="" ><input id="brs" type="file" onchange="previewFile()" style="opacity: 0;" ></div>
+      <md-progress-linear ng-show="uploading" md-mode="indeterminate"></md-progress-linear>
+      <div class="profileImg" onclick="browsFile()"><img width="100%" id="pict"  src="" ><input id="brs" type="file" accept="image/jpeg"  onchange="previewFile()" style="opacity: 0;" ></div>
       <div    class="profileDivSize">
          <ng-include src="'/view/src/htm/profile.htm'"></ng-include>
-         <ng-include src="'/view/src/htm/resetPassword.htm'"></ng-include>
       </div>
    </body>
 </html>

@@ -1,5 +1,5 @@
 var allows = {};
-var tokens={};
+var tokens = {};
 
 function Acl() {}
 
@@ -8,9 +8,9 @@ Acl.prototype.registerCondition = function(name, callback) {
         throw new Error('name should be string');
     } else if ('function' != typeof callback) {
         throw new Error('callback should be function');
-    } else if(allows[name]){
-    	throw new Error('you already have such condition');
-    }else {
+    } else if (allows[name]) {
+        throw new Error('you already have such condition');
+    } else {
         allows[name] = callback;
     }
 };
@@ -23,10 +23,10 @@ Acl.prototype.allow = function(name) {
     }
 };
 
-Acl.prototype.setToken=function(email,token){
-    tokens[email]=token;
+Acl.prototype.setToken = function(email, token) {
+    tokens[email] = token;
 }
-Acl.prototype.getToken=function(email){
+Acl.prototype.getToken = function(email) {
     return tokens[email];
 }
 

@@ -2,8 +2,6 @@
 <html>
    <head>
       <title>Usage Of HDM</title>
-      
-     
       <link rel="stylesheet" href="../css/style.css">
       <script src="../../libs/angular.js"></script>
       <script src="../../../app/app.js"></script>
@@ -18,130 +16,110 @@
       <script type="text/javascript" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/t-114/svg-assets-cache.js"></script>
       <script type="text/javascript" src="https://cdn.gitcdn.link/cdn/angular/bower-material/v1.1.0-rc2/angular-material.js"></script>
       <style>
-*,
-*:after,
-*:before {
-  box-sizing: border-box;
-}
-
-.steps-container {
-  overflow: hidden;
-  margin: 0px;
-  padding: 0px;
-  white-space: nowrap;
-    width: 100%;
-    border:none;
-  counter-reset: steps;
-}
-.steps {
-  width  : 32%;
-  position: relative;
-  display: inline-block;
-  left: -28px; /* -2px default + 26px offset to hide skewed area on the left side of first element*/
-  height: 50px;
-  line-height: 50px;
-  margin-left: 0px;
-  margin-right: 0px;
-  border:none;
-  counter-increment: steps;
-  cursor: pointer;
-  transition: background 1s;
-  min-height: 30px;
-}
-
-.steps:after,
-.steps:before {
-  position: absolute;
-  content: '';
-  left: 0px;
-  height: 50%;
-  width: 100%;
- 
-  background: #999999;
-}
-
-.steps:before {
-  transform: skew(45deg);
-  top: 0px;
-  
-  transform-origin: top left;
-}
-
-.steps:after {
-  transform: skew(-45deg);
-  bottom: 0px;
-
-  transform-origin: bottom left;
-}
-
-.steps span{
-  z-index: 1300;
-  display: block;
-  font-size: 25px;
-  padding-left: 40px;
-  padding-bottom: 20px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  width: 100%;
-  height: 75%;
-  vertical-align: middle;
-  border:none;
-  text-align: center;
-}
-
-.steps span:before{
-  z-index: 11;
-/*  content: counter(steps) ". ";*/
-}
-.steps.active span{
-  font-weight: bold;  
-}
-.steps.active:before,
-.steps.active:after {
-  z-index: 11;
-  background: #0094F7;
-}
-
-/* Just for demo */
-html,
-
-input[type="range"]{
-  vertical-align: middle;
-}
-label{
-  font-variant: small-caps;
-  font-weight: bold;
-  font-size: 1.25em;
-  letter-spacing: 1.1px;
-}
+         *,
+         *:after,
+         *:before {
+         box-sizing: border-box;
+         }
+         .steps-container {
+         overflow: hidden;
+         margin: 0px;
+         padding: 0px;
+         white-space: nowrap;
+         width: 100%;
+         border:none;
+         counter-reset: steps;
+         }
+         .steps {
+         width  : 32%;
+         position: relative;
+         display: inline-block;
+         left: -28px; /* -2px default + 26px offset to hide skewed area on the left side of first element*/
+         height: 50px;
+         line-height: 50px;
+         margin-left: 0px;
+         margin-right: 0px;
+         border:none;
+         counter-increment: steps;
+         cursor: pointer;
+         transition: background 1s;
+         min-height: 30px;
+         }
+         .steps:after,
+         .steps:before {
+         position: absolute;
+         content: '';
+         left: 0px;
+         height: 50%;
+         width: 100%;
+         background: #999999;
+         }
+         .steps:before {
+         transform: skew(45deg);
+         top: 0px;
+         transform-origin: top left;
+         }
+         .steps:after {
+         transform: skew(-45deg);
+         bottom: 0px;
+         transform-origin: bottom left;
+         }
+         .steps span{
+         z-index: 1300;
+         display: block;
+         font-size: 25px;
+         padding-left: 40px;
+         padding-bottom: 20px;
+         overflow: hidden;
+         text-overflow: ellipsis;
+         width: 100%;
+         height: 75%;
+         vertical-align: middle;
+         border:none;
+         text-align: center;
+         }
+         .steps span:before{
+         z-index: 11;
+         /*  content: counter(steps) ". ";*/
+         }
+         .steps.active span{
+         font-weight: bold;  
+         }
+         .steps.active:before,
+         .steps.active:after {
+         z-index: 11;
+         background: #0094F7;
+         }
+         /* Just for demo */
+         html,
+         input[type="range"]{
+         vertical-align: middle;
+         }
+         label{
+         font-variant: small-caps;
+         font-weight: bold;
+         font-size: 1.25em;
+         letter-spacing: 1.1px;
+         }
       </style>
-  
-    
-</head>
-
+   </head>
    <body >
-
-     <!--Usage div -->
+      <!--Usage div -->
       <div  ng-app="app" ng-controller="usageController" class="styledBg  " id="sizeOfUsageBg" >
-<script class="cssdeck" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
-                 
-                <div class='steps-container' >
-                   <label ng-repeat ="prog in progressArray">
-                          <div  ng-click="showDiv(prog.showDiv)"  ng-class="{true: 'active steps', false: 'steps'}[isActive[prog.showDiv]]">
-                            <span style=" position:absolute;color:white;" >Step {{prog.Step}}</span>
-                          </div>
-                         </label>
-           </div>
-          <div ng-repeat ="show in showArray" >
-                <div ng-show="{{show.div}}">
-                    <img class="usageImageSize"  ng-src = "{{show.src}}" alt="step"/>
-                    <p class="usageText"  >{{show.text}}</p>
-                </div>
-          </div>
-
-
-
-
-     </div>
+         <script class="cssdeck" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+         <div class='steps-container' >
+            <label ng-repeat ="prog in progressArray">
+               <div  ng-click="showDiv(prog.showDiv)"  ng-class="{true: 'active steps', false: 'steps'}[isActive[prog.showDiv]]">
+                  <span style=" position:absolute;color:white;" >Step {{prog.Step}}</span>
+               </div>
+            </label>
+         </div>
+         <div ng-repeat ="show in showArray" >
+            <div ng-show="{{show.div}}">
+               <img class="usageImageSize"  ng-src = "{{show.src}}" alt="step"/>
+               <p class="usageText"  >{{show.text}}</p>
+            </div>
+         </div>
+      </div>
    </body>
 </html>

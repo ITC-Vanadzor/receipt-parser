@@ -1,0 +1,11 @@
+<div ng-include="'/view/src/htm/menubar.htm'"></div>
+<div  align="center" layout="column" ng-cloak="" id="singUpBg" class="inputdemoErrorsAdvanced styledBg  " >
+   <img   ng-src="{{choosedFile}}"  style="margin: 5%; height: 10em;">
+   <h3> {{uploadStatus}} </h3>
+   <div style="width: 80%">
+      <md-progress-linear ng-show="uploading" md-mode="indeterminate"></md-progress-linear>
+      <md-button  ng-click="uploadFile()" class="md-raised" >{{buttonText}}</md-button>
+      <input id="receipt" type="file" accept="image/jpeg" style="display: none;" >
+   </div>
+</div>
+</div>

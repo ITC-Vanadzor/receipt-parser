@@ -1,4 +1,4 @@
-var app = angular.module("app", ['ngRoute', 'ngMaterial', 'ngMessages', 'material.svgAssetsCache','ngTable']);
+var app = angular.module("app", ['ngRoute', 'ngMaterial', 'ngMessages', 'material.svgAssetsCache', 'ngTable']);
 
 app.config(['$routeProvider', function($routeProvider) {
 
@@ -8,12 +8,6 @@ app.config(['$routeProvider', function($routeProvider) {
 
         templateUrl: '/view/src/htm/usage.htm',
         controller: 'usageController'
-
-    }).
-    when('/download', {
-
-        templateUrl: '/view/src/htm/download.htm',
-        controller: 'indexCtl'
 
     }).
     when('/about', {
@@ -34,21 +28,21 @@ app.config(['$routeProvider', function($routeProvider) {
         controller: 'signInController'
 
     }).
+    when('/upload', {
+
+        templateUrl: '/view/src/htm/upload.htm',
+        controller: 'indexCtl'
+
+    }).
     when('/forgotpassword', {
 
         templateUrl: '/view/src/htm/forgotpassword.htm',
         controller: 'signInController'
 
     }).
-    when('/loginError', {
+    when('/reset:token', {
 
-        templateUrl: '/view/src/htm/signin.htm',
-        controller: 'signInController'
-
-    }).
-    when('/registerError', {
-
-        templateUrl: '/view/src/htm/signup.htm',
+        templateUrl: '/view/src/htm/resetpassword.htm',
         controller: 'signInController'
 
     }).
