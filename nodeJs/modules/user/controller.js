@@ -26,7 +26,6 @@ module.exports.getProfile = function(req, res) {
 	res.render('src/profile.html');
 };
 
-
 module.exports.signIn = function(req, res,next) {
    var data = req.body;
     passport.authenticate('local', function(err, user, message) {
@@ -57,26 +56,21 @@ module.exports.signUp = function(req, res) {
 module.exports.forgot = function(req, res, next) {
 	async.waterfall([
 		function(done) {
-			crypto.randomBytes(20, function(err, buf) {
-				var token = generateToken(req.body.email);
-				done(err, token);
-			});
-		},
-		function(token, done) {
 			User.findOne({ email: req.body.email }, function(err, user) {
-				if (!user) {
-				   console.log('error', 'No account with that email address exists.');
+				if ((err) || (!user)) {
+				   console.log('ERROR:', 'No account with that email address exists.');
 				   return res.redirect('login/#/forgotpassword');
 				}
 				
+				var token = generateToken(user.id);
 				user.resetPasswordToken = token;
 				user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
 				
-				User.saveActiveTocken(user, function(err) {
+				User.addResetToken(user, function(err) {
 					if (err)
-						console.log("Couldn't save the tocken: " + err);
+						console.log('ERROR:',"Couldn't save the token: " + err);
 					done(err,token, user);
-				  });
+				});
 			});
 		},
 		function(token, user, done) {
@@ -84,7 +78,7 @@ module.exports.forgot = function(req, res, next) {
 		    service: 'Gmail',
 		    auth: {
 		      user: 'nanenare@gmail.com',
-		      pass: '####PASS#####'
+		      pass: '####PASS####'
 		    }
 		  });
 		  var mailOptions = {
@@ -97,7 +91,7 @@ module.exports.forgot = function(req, res, next) {
 		      'If you did not request this, please ignore this email and your password will remain unchanged.\n'
 		  };
 		  smtpTransport.sendMail(mailOptions, function(err) {
-		    console.log('info', 'An e-mail has been sent to ' + user.email 
+		    console.log('INFO:', 'An e-mail has been sent to ' + user.email 
 				+ ' with further instructions.');
 		    done(err, 'done');
 		  });
@@ -113,18 +107,17 @@ module.exports.reset = function(req, res) {
   User.findOneByToken({ 
     resetPasswordToken: req.params.token, 
     resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
-    if (!user) {
-      console.log('error', 'Password reset token is invalid or has expired.');
+    if (err) {
+      console.log('ERROR:', 'Password reset token is invalid or has expired.');
       return res.redirect('login/#/forgotpassword');
     }
 // res.render('login/#/resetpassword', {
 //   user: user
 // });
   });
-
 };
 
 var generateToken = function(user) {
-	var token = jsonwebtoken.sign(new Date().getTime().toString(), user);
+	var token = jsonwebtoken.sign(new Date().getTime().toString(), user.toString());
     return token;
 };
