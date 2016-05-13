@@ -90,6 +90,23 @@
    });
 
    app.controller('signInController', function($scope, $http) {
+        
+        switch (location.hash) {
+           case '#/signin':
+               document.title="Sign In To HDM";
+               break;
+           case '#/signup':
+               document.title="Sign Up To HDM";               
+               break;
+           case '#/forgotpassword':      
+                document.title="Forgot Password";               
+                break;    
+           default:
+                document.title="Change Password";            
+   };
+
+
+
        setCookie('HDMtoken', null);
        localStorage.setItem('avatar', '');
        $scope.user = {}
@@ -265,6 +282,7 @@
                    $scope.user.Name = data.name;
                    $scope.user.Surname = data.surname;
                    $scope.user.Birthday = data.birthday;
+                   if(!data.image) data.image="view/res/profile.png"
                    document.getElementById('pict').src = '/'+data.image;
                    localStorage.setItem('avatar', '/' + data.image);
                });
@@ -362,24 +380,19 @@
        }
 
        $scope.webToolbar = true;
-       switch (location.pathname) {
-           case '/profile':
-               break;
-           case '/registration/statistic':
-           case '/login/statistic':
-               break;
-           default:
-
-               break;
-       };
 
        switch (location.hash) {
            case '#/usage':
                $scope.usageDisabled = true;
+               document.title="How To Use";
                break;
            case '#/about':
                $scope.aboutDisabled = true;
+               document.title="About Us";               
                break;
+           case '#/upload':      
+                document.title="Upload New Receipt";               
+                break;    
        };
 
 
@@ -414,6 +427,8 @@
        $scope.choosedFile = '/view/res/icon_receipt.png';
        $scope.buttonText = 'Choose Photo';
        $scope.homeShow = false;
+       $scope.showDiff = false;
+       $scope.tesseractResult='';
 
        if (location.hash == "#/upload" && !getCookie('HDMtoken')) {
            location.href = '/';
@@ -472,6 +487,11 @@
                    $scope.buttonText = 'Add photo';
                    $scope.cancelVisible = false;
                    $scope.uploading = false;
+
+                   $scope.tesseractResult=data;
+                   $scope.showDiff=true;
+                    $scope.$apply();
+
                })
                .error(function(err) {
                    console.log('error');
@@ -493,7 +513,8 @@
                }
            })
            .success(function(data, status, headers) {
-               localStorage.setItem('avatar', '/view/res/' + data.photo);
+              if(!data.image) data.image="view/res/profile.png"
+               localStorage.setItem('avatar', data.image);
            });
        $scope.statisticVisible = false;
        tok = getCookie('HDMtoken');

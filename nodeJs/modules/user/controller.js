@@ -15,19 +15,20 @@ var base64 = require('node-base64-image');
 var exec = require('child_process').exec;
 var cookie = require('cookie');
 
-function puts(error, stdout, stderr) { 
-    if(error){
-        console.log(error);
-     }
-     else{
-        console.log(stdout);
-        console.log(stderr);        
-     }
- }
 
- function ImageDataParser(imagePath){
+
+ function ImageDataParser(imagePath,callback){
     var command="tesseract "+imagePath+" tmp"
-    exec(command, puts);
+    exec(command, function (error, stdout, stderr) { 
+         if(error){
+               console.log(error);
+               callback(error);
+         }
+         else{
+                var text=fs.readFileSync('tmp.txt');
+                callback(null,text);      
+          }
+     });
  }
 
 
@@ -42,17 +43,22 @@ module.exports.getFile = function(req, res) {
     var imageData = Object.keys(req.body)[0];
     imageData=new Buffer(imageData.replace("data:image/jpeg;base64,",'').split(' ').join('+'), 'base64');
     var options={};
-    options.filename = 'public/resources/receipt/userid_'+Date.now();
+    options.filename = 'resources/receipt/userid_'+Date.now();
  
     base64.base64decoder(imageData, options, function (err, saved) {
         if (err) { 
             console.log(err); 
+            res.end();
         } 
         else{
-            ImageDataParser(options.filename+'.jpg');
+            ImageDataParser(options.filename+'.jpg',function(err,data){
+                if(!err){
+                    res.send(data);
+                }
+                res.end();
+            });
         } 
     });  
-    res.end();
 
 };
 module.exports.getLogin = function(req, res) {

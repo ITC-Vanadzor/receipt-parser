@@ -3,6 +3,7 @@ var joi = require('joi');
 var sha256 = require('js-sha256');
 var jsonwebtoken = require('jsonwebtoken');
 var base64 = require('node-base64-image');
+var fs = require('fs');
 
 function User() {}
 
@@ -25,58 +26,60 @@ var getUserIDByEmail = function(email, callback) {
     });
 }
 
-User.prototype.getData=function(email,callback){
+User.prototype.getData = function(email, callback) {
     var query = "SELECT * FROM account_extend WHERE email='" + email + "'";
     db.query(query, function(err, rows) {
-            var result={};
-        if (!err) {
+        var result = {};
+        if (!err && rows[0]) {
             result = rows[0];
-            result.photo = "coy.jpg"; //rows[0].image;
         }
-        callback(err,result);
+        callback(err, result);
     });
 }
-var savePhoto=function(data,callback){
-    //TODO
-    var imageData=new Buffer(data.replace("data:image/jpeg;base64,",'').split(' ').join('+'), 'base64');
-    var options={};
-    var pName='userid_'+Date.now();
+var savePhoto = function(email,data, callback) {
+    var query="SElECT image from account_extend where email='"+email +"'";
+    db.query(query, function(err, rows) {
+        if(rows[0] && fs.existsSync('public/'+rows[0].image)){
+            console.log('removing  ',rows[0].image);
+            fs.unlinkSync('public/'+rows[0].image);
+        }
+        var imageData = new Buffer(data.replace("data:image/jpeg;base64,", '').split(' ').join('+'), 'base64');
+        var options = {};
+        var pName = 'userid_' + Date.now();
 
-    var forSend='resources/avatar/'+pName;
-    options.filename = 'public/'+forSend;
+        var forSend = 'resources/avatar/' + pName;
+        options.filename = 'public/' + forSend;
 
 
-
-    base64.base64decoder(imageData, options, function (err, saved) {
-        if (err) { 
-            console.log(err); 
-            callback('...');
-        } 
-        else{
-            callback(forSend +'.jpg');
-        } 
-    });  
+        base64.base64decoder(imageData, options, function(err, saved) {
+            if (err) {
+                console.log(err);
+                callback('...');
+            } else {
+                callback(forSend + '.jpg');
+            }
+        });
+    });
 }
 
 
-User.prototype.setData=function(email,data,callback){
-    console.log(email,'--setData--',data);
-    getUserIDByEmail(email, function(err,u_id) {
-        console.log("------------1 user " + u_id);
+User.prototype.setData = function(email, data, callback) {
+    getUserIDByEmail(email, function(err, u_id) {
         if (u_id) {
-            if(data.photo.search('base64')!=-1){
-                savePhoto(data.photo,function(fpath){
-                    if(fpath){
-                    var delQuery = "DELETE FROM account WHERE u_id=" + u_id ;
-                    var query = "Insert into account(u_id, f_id, f_value) values "
-                    + " (" + u_id + ", 1, '" + data.Surname + "')"
-                    + " ,(" + u_id + ", 2, '" + data.Birthday + "')"
-                    + " ,(" + u_id + ", 3, '" + fpath + "')";
-
-                       console.log('Query Del: ',delQuery);
-                        console.log('Query : ',query);
+            if (data.photo.search('base64') != -1) {
+                savePhoto(email,data.photo, function(fpath) {
+                    if (fpath) {
+                        var delQuery = "DELETE FROM account WHERE u_id=" + u_id;
+                        var nameQuery = "UPDATE user SET username='" + data.Name + "' where id=" + u_id;
+                        var query = "Insert into account(u_id, f_id, f_value) values " +
+                            " (" + u_id + ", 1, '" + data.Surname + "')" +
+                            " ,(" + u_id + ", 2, '" + data.Birthday + "')" +
+                            " ,(" + u_id + ", 3, '" + fpath + "')";
                         db.query(delQuery, function(err, rows) {
                             db.query(query, function(err, rows) {
+                                db.query(nameQuery, function(err, rows) {
+                                    callback(err);
+                                });
                                 callback(err);
                             });
                             callback(err);
@@ -85,32 +88,33 @@ User.prototype.setData=function(email,data,callback){
                     }
 
                 });
-            }
-            else{
-                    var delQuery = "DELETE FROM account WHERE u_id=" + u_id + " AND f_id!=3" ;
-                     var query = "Insert into account(u_id, f_id, f_value) values "
-                    + " (" + u_id + ", 1, '" + data.Surname + "')"
-                    + " ,(" + u_id + ", 2, '" + data.Birthday + "')";
-                                console.log('Query Del: ',delQuery);
-            console.log('Query : ',query);
-            db.query(delQuery, function(err, rows) {
-                db.query(query, function(err, rows) {
+            } else {
+                var delQuery = "DELETE FROM account WHERE u_id=" + u_id + " AND f_id!=3";
+                var nameQuery = "UPDATE user SET username='" + data.Name + "' where id=" + u_id;
+                var query = "Insert into account(u_id, f_id, f_value) values " +
+                    " (" + u_id + ", 1, '" + data.Surname + "')" +
+                    " ,(" + u_id + ", 2, '" + data.Birthday + "')";
+                db.query(delQuery, function(err, rows) {
+                    db.query(query, function(err, rows) {
+                        db.query(nameQuery, function(err, rows) {
+                            callback(err);
+                        });
+                        callback(err);
+                    });
                     callback(err);
                 });
-                callback(err);
-            });
             }
 
 
         }
         callback(err);
-     });
+    });
 }
 
-User.prototype.setPassword=function(email,data){
+User.prototype.setPassword = function(email, data) {
     var trPass = transformPasword(data.newpass);
     var encodePassword = sha256(trPass);
-    var query = "UPDATE user SET password='"+ encodePassword +"' WHERE email='" + email + "'";
+    var query = "UPDATE user SET password='" + encodePassword + "' WHERE email='" + email + "'";
     db.query(query, function(err, rows) {
         if (err) {
             console.log('ERROR: ' + err);
@@ -121,10 +125,10 @@ User.prototype.setPassword=function(email,data){
     });
 }
 
-User.prototype.updatePassword = function(u_id,data){
+User.prototype.updatePassword = function(u_id, data) {
     var trPass = transformPasword(data.newPassword);
     var encodePassword = sha256(trPass);
-    var query = "UPDATE user SET password='"+ encodePassword +"' WHERE id='" + u_id + "'";
+    var query = "UPDATE user SET password='" + encodePassword + "' WHERE id='" + u_id + "'";
     db.query(query, function(err, rows) {
         if (err) {
             console.log('ERROR: ' + err);
@@ -135,7 +139,7 @@ User.prototype.updatePassword = function(u_id,data){
     });
 }
 
-User.prototype.checkPassword =function(email,password, callback){
+User.prototype.checkPassword = function(email, password, callback) {
     var trPass = transformPasword(password);
     var encodePassword = sha256(trPass);
     var query = "SELECT password FROM user WHERE  email='" + email + "'";
@@ -168,66 +172,66 @@ User.prototype.saveActiveTocken = function(user, callback) {
 }
 
 User.prototype.addResetToken = function(user, callback) {
-	var insertQuery = 'INSERT INTO reset_tokens (u_id,token) '
-		+ ' VALUES(' + user.id+ ',"' + user.resetPasswordToken +'"  )' ;
-	console.log("INFO:"," Add reset pass token ... " + insertQuery );
-	db.query(insertQuery, function(err, rows) {
-		if (err) {
-			insertQuery = 'UPDATE reset_tokens SET token="' 
-				+ user.resetPasswordToken + '" WHERE u_id=' + user.id ;
-			db.query(insertQuery, function(err, rows) {
-				callback(err, user);
-			});
-		} else {
-			callback(err, user);
-		}
-	});
+    var insertQuery = 'INSERT INTO reset_tokens (u_id,token) ' +
+        ' VALUES(' + user.id + ',"' + user.resetPasswordToken + '"  )';
+    console.log("INFO:", " Add reset pass token ... " + insertQuery);
+    db.query(insertQuery, function(err, rows) {
+        if (err) {
+            insertQuery = 'UPDATE reset_tokens SET token="' +
+                user.resetPasswordToken + '" WHERE u_id=' + user.id;
+            db.query(insertQuery, function(err, rows) {
+                callback(err, user);
+            });
+        } else {
+            callback(err, user);
+        }
+    });
 };
 
 User.prototype.findOne = function(data, callback) {
-	//TODO: validate email
-	validateEmailData(data, function(err, data) {
-		if (err) 
-			callback("ERROR:"," Incorrect email format: "
-			 + err, data);
-	});
-	var password = transformPasword(data.password);
-	encodePassword = sha256(password);
-	var query = 'SELECT * FROM user WHERE email ="' + data.email + '"';
-	db.query(query, function(err, rows) {
-		var user = rows && rows.length ? rows[0] : null;
-		callback(err, user);
-	});
+    //TODO: validate email
+    validateEmailData(data, function(err, data) {
+        if (err)
+            callback("ERROR:", " Incorrect email format: " +
+                err, data);
+    });
+    var password = transformPasword(data.password);
+    encodePassword = sha256(password);
+    var query = 'SELECT * FROM user WHERE email ="' + data.email + '"';
+    db.query(query, function(err, rows) {
+        var user = rows && rows.length ? rows[0] : null;
+        callback(err, user);
+    });
 };
 
 User.prototype.findOneByToken = function(data, callback) {
-	console.log("INFO:"," Reset token validation ... " + data.resetPasswordToken);
-	var query = 'SELECT * FROM reset_tokens WHERE token ="' 
-		+ data.resetPasswordToken + '"';
-	db.query(query, function(err, rows) {
-		var isExist = rows && rows.length ? rows[0] : null;
-		if ((!isExist) || (err)) {
-			callback("ERROR:There was either an issue with given token or it is invalid." );
-		} else {
-        var decode =jsonwebtoken.decode(data.resetPasswordToken);
-        console.log("----------------- decode " + decode);
-    		if (data.resetPasswordExpires - decode > 3600000) {
-    			callback("Token is old.");
-    		} else {
-    			callback("", rows[0].u_id);
-			}
-    	}
-	});
-};
-
-User.prototype.findOneByTempToken = function(data, callback) {
-    console.log("INFO:"," Reset token validation ... " + data.resetPasswordToken);
-    var query = 'SELECT * FROM reset_tokens WHERE token ="' 
-        + data.resetPasswordToken + '"';
+    console.log("INFO:", " Reset token validation ... " + data.resetPasswordToken);
+    var query = 'SELECT * FROM reset_tokens WHERE token ="' +
+        data.resetPasswordToken + '"';
     db.query(query, function(err, rows) {
         var isExist = rows && rows.length ? rows[0] : null;
         if ((!isExist) || (err)) {
-            callback("ERROR:There was either an issue with given token or it is invalid." );
+            callback("ERROR:There was either an issue with given token or it is invalid.");
+        } else {
+            var decode = jsonwebtoken.decode(data.resetPasswordToken);
+            console.log("----------------- decode " + decode);
+            if (data.resetPasswordExpires - decode > 3600000) {
+                callback("Token is old.");
+            } else {
+                callback("", rows[0].u_id);
+            }
+        }
+    });
+};
+
+User.prototype.findOneByTempToken = function(data, callback) {
+    console.log("INFO:", " Reset token validation ... " + data.resetPasswordToken);
+    var query = 'SELECT * FROM reset_tokens WHERE token ="' +
+        data.resetPasswordToken + '"';
+    db.query(query, function(err, rows) {
+        var isExist = rows && rows.length ? rows[0] : null;
+        if ((!isExist) || (err)) {
+            callback("ERROR:There was either an issue with given token or it is invalid.");
         } else {
             callback("", rows[0].u_id);
         }
