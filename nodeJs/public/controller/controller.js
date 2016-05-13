@@ -1,13 +1,22 @@
-   function setCookie(cname, cvalue) {
+   function setCookie(cname, cvalue, days) {
        if (cvalue) {
-           document.cookie = cname + "=" + cvalue + "; path=/;";
+            if(days){
+                 var d = new Date();
+                 d.setTime(d.getTime() + (days*24*60*60*1000));
+                 var expires = "expires="+ d.toUTCString();
+                 document.cookie = cname + "=" + cvalue + "; path=/;"+expires;                 
+
+            }
+            else{
+                 document.cookie = cname + "=" + cvalue + "; path=/;";
+            }
        } else {
            document.cookie = cname + "=; path=/;"
        }
 
    }
 
-   function getCookie(cname) {
+      function getCookie(cname) {
        var name = cname + "=";
        var ca = document.cookie.split(';');
        for (var i = 0; i < ca.length; i++) {
@@ -86,20 +95,19 @@
        $scope.user = {}
 
        $scope.changePassword = function() {
-           var data = {};
-           data.newPassword = $scope.newPassword;
-           data.repPassword = $scope.repPassword;
+           $scope.user.token=location.hash.slice(8,location.hash.length);
+           
            $http({
                    method: 'POST',
-                   url: '/changepassword/',
-                   data: $.param(data),
+                   url: '/resetpassword/',
+                   data: $.param($scope.user),
                    headers: {
                        'Content-Type': 'application/x-www-form-urlencoded'
                    }
                })
                .success(function(data, status, headers) {
-                   location.href = "/";
-               });
+                   location.href = "/login/#/signin";
+            });
 
 
 
@@ -116,7 +124,12 @@
                })
                .success(function(data, status, headers) {
                    if (headers('token')) {
-                       setCookie('HDMtoken', headers('token'));
+                    if($scope.rememberChecked){
+                       setCookie('HDMtoken', headers('token'),10);                          
+                      }
+                      else{
+                       setCookie('HDMtoken', headers('token'));                        
+                      }
                        location.href = "/statistic";
                    } else {
                        $scope.signinError = true;
@@ -240,9 +253,9 @@
 
        $scope.getUserData = function() {
            $http({
-                   method: 'POST',
+                   method: 'GET',
                    url: '/getuserdata/',
-                   data: $.param($scope.user),
+                   data: '',
                    headers: {
                        'Content-Type': 'application/x-www-form-urlencoded'
                    }
@@ -471,7 +484,7 @@
 
    app.controller('loginedCtl', function($scope, ngTableParams, $http) {
        $http({
-               method: 'POST',
+               method: 'GET',
                url: '/getuserdata/',
                data: '',
                headers: {

@@ -99,7 +99,7 @@ module.exports.forgot = function(req, res, next) {
     async.waterfall([
         function(done) {
             crypto.randomBytes(20, function(err, buf) {
-                var token = generateToken(req.body.email);
+                var token = generateTemporaryToken(req.body.email);
                 done(err, token);
             });
         },
@@ -132,11 +132,11 @@ module.exports.forgot = function(req, res, next) {
             });
             var mailOptions = {
                 to: user.email,
-                from: 'nanenare@gmail.com',
+                from: 'hdmnaahgm@gmail.com',
                 subject: 'Node.js Password Reset',
                 text: 'You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n' +
                     'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
-                    'https://' + req.headers.host + '/login/#/reset:' + token + '\n\n' +
+                    'https://' + req.headers.host + '/reset/' + token + '\n\n' +
                     'If you did not request this, please ignore this email and your password will remain unchanged.\n'
             };
             smtpTransport.sendMail(mailOptions, function(err) {
@@ -153,15 +153,24 @@ module.exports.forgot = function(req, res, next) {
 };
 
 module.exports.reset = function(req, res) {
+
     User.findOneByToken({
         resetPasswordToken: req.params.token,
         resetPasswordExpires: {
             $gt: Date.now()
         }
     }, function(err, user) {
+        //console.log(err);
+        console.log(err);
         if (!user) {
             console.log('error', 'Password reset token is invalid or has expired.');
-            return res.redirect('/login/#/forgotpassword');
+            res.redirect('/login/#/forgotpassword');
+            return;
+        }
+        else{
+            console.log('success', 'Password reset token is valid.');
+            res.redirect('/login/#/reset:'+req.params.token);
+            return;
         }
     });
 };
@@ -174,41 +183,68 @@ module.exports.getUserData=function(req, res) {
 
     if(token.length>10){
         var dec=jsonwebtoken.decode(token,{complete: true});
-        res.send(User.getData(dec.payload));
+        User.getData(dec.payload,function(err,rows){
+            if (!err) {
+                res.send(rows);
+            } else {
+                 res.end();
+            }
+        });
     }    
-
-
-    res.end();
-
 }
 
 module.exports.setUserData=function(req, res) {
     var token=req.headers.cookie;
     if(token.length>10){
         token=token.slice(9,token.length);
-
         var dec=jsonwebtoken.decode(token,{complete: true});
-        res.send(User.setData(dec.payload,req.body));
-    }    
-
-
-    res.end();
+        User.setData(dec.payload,req.body, function(err) {
+            console.log("INFO: " + err);
+            res.end();
+        });
+    }   
 }
 
 module.exports.setUserPassword=function(req, res) {
-    var token=req.headers.cookie;
+    var token='';
+    if(!req.body.token){
+        token=req.headers.cookie.slice(9,req.headers.cookie.length);
+    } else{
+        token=req.body.token;
+    }
     if(token.length>10){
-        token=token.slice(9,token.length);
-
         var dec=jsonwebtoken.decode(token,{complete: true});
-        res.send(User.setPassword(dec.payload,req.body));
-    }    
-
-
+        User.checkPassword(dec.payload,req.body.password, function (err) {
+            if (!err){
+                res.send(User.setPassword(dec.payload,req.body));
+            } else {
+                console.log(err);
+            }
+        });
+    } else {
+        console.log('-TODO LOG-    ');
+    }
     res.end();
+
+}
+
+module.exports.resetUserPassword = function (req, res) {
+    User.findOneByToken({"resetPasswordToken" :req.body.token}, function(err,userId){
+        if ((!err) && (userId)) {
+            console.log("Hey " + userId + " req.body : " + req.body);
+             res.send(User.updatePassword(userId,req.body));
+        } else {
+            console.log(err);
+        }
+    });
 }
 
 var generateToken = function(user) {
-	var token = jsonwebtoken.sign(new Date().getTime().toString(), user.toString());
+	var token = jsonwebtoken.sign(user.toString(),new Date().getTime().toString());
 	return token;
+};
+
+var generateTemporaryToken = function(user) {
+    var token = jsonwebtoken.sign(new Date().getTime().toString(), user.toString());
+    return token;
 };

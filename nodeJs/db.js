@@ -3,7 +3,7 @@ var db = mySql.createConnection({
     host: 'localhost',
     user: 'root',
     password: 'root',
-    database: 'hdm'
+    database: 'HDM'
 });
 
 module.exports = db;

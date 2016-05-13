@@ -2,7 +2,6 @@
     width: 90%;
     margin: 5%;
     margin-bottom:1%;
-    height: 400px;
     z-index: -1;
 }
 .divAbout{
@@ -23,6 +22,7 @@
     position:absolute;
     margin: -15% 9%;
     font-size: 100%;
+    color: #D7D8D9;
 }
 
 
@@ -474,7 +474,7 @@ input[type=date] {
 }
 .usageText{
 	margin:  10% 0% 3% 0%;
-	width:35%;
+	width:50%;
 	float:right;
 	font-size:90%;
 	padding:1%;
@@ -484,7 +484,6 @@ input[type=date] {
 
 /*size of images for usage */
 .usageImageSize{
-	float:left;
 	margin:2% 0% 4%  2%;
 	width: 40%;
 }
