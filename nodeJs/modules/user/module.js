@@ -2,6 +2,7 @@ var db = require('../../db');
 var joi = require('joi');
 var sha256 = require('js-sha256');
 var jsonwebtoken = require('jsonwebtoken');
+var base64 = require('node-base64-image');
 
 function User() {}
 
@@ -35,25 +36,72 @@ User.prototype.getData=function(email,callback){
         callback(err,result);
     });
 }
+var savePhoto=function(data,callback){
+    //TODO
+    var imageData=new Buffer(data.replace("data:image/jpeg;base64,",'').split(' ').join('+'), 'base64');
+    var options={};
+    var pName='userid_'+Date.now();
+
+    var forSend='resources/avatar/'+pName;
+    options.filename = 'public/'+forSend;
+
+
+
+    base64.base64decoder(imageData, options, function (err, saved) {
+        if (err) { 
+            console.log(err); 
+            callback('...');
+        } 
+        else{
+            callback(forSend +'.jpg');
+        } 
+    });  
+}
+
 
 User.prototype.setData=function(email,data,callback){
     console.log(email,'--setData--',data);
     getUserIDByEmail(email, function(err,u_id) {
         console.log("------------1 user " + u_id);
         if (u_id) {
-            console.log("------------1 user " + u_id);
-            var delQuery = "DELETE FROM account WHERE u_id=" + u_id ;
-            db.query(delQuery, function(err, rows) {
-                var query = "Insert into account(u_id, f_id, f_value) values "
+            if(data.photo.search('base64')!=-1){
+                savePhoto(data.photo,function(fpath){
+                    if(fpath){
+                    var delQuery = "DELETE FROM account WHERE u_id=" + u_id ;
+                    var query = "Insert into account(u_id, f_id, f_value) values "
                     + " (" + u_id + ", 1, '" + data.Surname + "')"
                     + " ,(" + u_id + ", 2, '" + data.Birthday + "')"
-                    + " ,(" + u_id + ", 3, '" + data.photo + "')";
-                console.log("------------2 query " + query);
+                    + " ,(" + u_id + ", 3, '" + fpath + "')";
+
+                       console.log('Query Del: ',delQuery);
+                        console.log('Query : ',query);
+                        db.query(delQuery, function(err, rows) {
+                            db.query(query, function(err, rows) {
+                                callback(err);
+                            });
+                            callback(err);
+                        });
+
+                    }
+
+                });
+            }
+            else{
+                    var delQuery = "DELETE FROM account WHERE u_id=" + u_id + " AND f_id!=3" ;
+                     var query = "Insert into account(u_id, f_id, f_value) values "
+                    + " (" + u_id + ", 1, '" + data.Surname + "')"
+                    + " ,(" + u_id + ", 2, '" + data.Birthday + "')";
+                                console.log('Query Del: ',delQuery);
+            console.log('Query : ',query);
+            db.query(delQuery, function(err, rows) {
                 db.query(query, function(err, rows) {
                     callback(err);
                 });
                 callback(err);
             });
+            }
+
+
         }
         callback(err);
      });

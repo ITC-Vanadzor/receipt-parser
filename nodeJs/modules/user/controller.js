@@ -42,7 +42,7 @@ module.exports.getFile = function(req, res) {
     var imageData = Object.keys(req.body)[0];
     imageData=new Buffer(imageData.replace("data:image/jpeg;base64,",'').split(' ').join('+'), 'base64');
     var options={};
-    options.filename = 'resources/receipt/userid_'+Date.now();
+    options.filename = 'public/resources/receipt/userid_'+Date.now();
  
     base64.base64decoder(imageData, options, function (err, saved) {
         if (err) { 

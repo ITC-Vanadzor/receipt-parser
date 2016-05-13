@@ -261,11 +261,12 @@
                    }
                })
                .success(function(data, status, headers) {
+                console.log(data);
                    $scope.user.Name = data.name;
                    $scope.user.Surname = data.surname;
                    $scope.user.Birthday = data.birthday;
-                   document.getElementById('pict').src = '/view/res/' + data.photo;
-                   localStorage.setItem('avatar', '/view/res/' + data.photo);
+                   document.getElementById('pict').src = '/'+data.image;
+                   localStorage.setItem('avatar', '/' + data.image);
                });
        }
 
